@@ -3,1160 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Epoch - Ultimate Class Selector Quiz [Reddit Edition]</title>
+    <title>Project Epoch - Class Selector Quiz [35 Questions]</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #0f1419;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(120, 89, 191, 0.13) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(89, 120, 191, 0.13) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(191, 89, 120, 0.13) 0%, transparent 50%);
-            min-height: 100vh;
-            color: #e7e9ea;
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
             padding: 20px;
-            line-height: 1.6;
+            min-height: 100vh;
         }
-
-        .main-container {
-            max-width: 900px;
+        
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+            background: rgba(30, 30, 50, 0.9);
             padding: 30px;
-            background: rgba(22, 27, 34, 0.9);
-            border-radius: 12px;
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
+        
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            color: #9ca3af;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-
-        .info-box {
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.95em;
-            color: #a5b4fc;
-        }
-
-        .quiz-container {
-            background: rgba(22, 27, 34, 0.9);
-            border-radius: 12px;
-            padding: 30px;
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .progress-container {
+            text-align: center;
+            color: #8b5cf6;
             margin-bottom: 30px;
         }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-            color: #9ca3af;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: rgba(55, 65, 81, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 100%);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        .question-section {
-            display: none;
-        }
-
-        .question-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .question {
-            font-size: 1.3em;
-            margin-bottom: 25px;
-            color: #f3f4f6;
-            font-weight: 500;
-        }
-
-        .question-context {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 3px solid #3b82f6;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-            color: #93c5fd;
-            border-radius: 4px;
-        }
-
-        .answers {
-            display: grid;
-            gap: 12px;
-        }
-
-        .answer-btn {
-            background: rgba(31, 41, 55, 0.5);
-            border: 1px solid rgba(75, 85, 99, 0.3);
-            color: #e5e7eb;
-            padding: 16px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            font-size: 1em;
-            position: relative;
-        }
-
-        .answer-btn:hover {
-            background: rgba(55, 65, 81, 0.5);
-            border-color: rgba(139, 92, 246, 0.5);
-            transform: translateX(4px);
-        }
-
-        .answer-btn:active {
-            transform: scale(0.98);
-        }
-
+        
         .start-screen {
             text-align: center;
             padding: 40px;
-            background: rgba(22, 27, 34, 0.9);
-            border-radius: 12px;
-            border: 1px solid rgba(139, 92, 246, 0.2);
         }
-
-        .start-screen.hidden {
-            display: none;
-        }
-
-        .start-btn {
-            padding: 16px 48px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        
+        .start-btn, .answer-btn, .restart-btn {
+            background: #8b5cf6;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: 600;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 30px;
+            margin: 10px;
+            transition: all 0.3s;
         }
-
-        .start-btn:hover {
+        
+        .start-btn:hover, .answer-btn:hover, .restart-btn:hover {
+            background: #7c3aed;
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
-
-        .results {
+        
+        .quiz-container {
             display: none;
-            background: rgba(22, 27, 34, 0.9);
-            border-radius: 12px;
-            padding: 40px;
-            border: 1px solid rgba(139, 92, 246, 0.2);
         }
-
-        .results.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .results-header {
-            text-align: center;
+        
+        .question {
+            font-size: 20px;
             margin-bottom: 30px;
         }
-
-        .class-result {
-            font-size: 3em;
-            margin: 20px 0;
-            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-
-        .score-breakdown {
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .score-item {
+        
+        .answers {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 12px;
-            background: rgba(55, 65, 81, 0.3);
-            border-radius: 6px;
-        }
-
-        .score-bar {
-            width: 60%;
-            height: 20px;
-            background: rgba(55, 65, 81, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .score-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 100%);
-            transition: width 0.5s ease;
-        }
-
-        .class-info-section {
-            margin: 30px 0;
-            padding: 25px;
-            background: rgba(31, 41, 55, 0.3);
-            border-radius: 8px;
-            border: 1px solid rgba(75, 85, 99, 0.3);
-        }
-
-        .class-info-section h3 {
-            color: #a5b4fc;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            flex-direction: column;
             gap: 15px;
-            margin-top: 15px;
         }
-
-        .spec-card {
-            background: rgba(55, 65, 81, 0.3);
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 3px solid #8b5cf6;
+        
+        .answer-btn {
+            text-align: left;
+            padding: 20px;
         }
-
-        .spec-card h4 {
-            color: #c4b5fd;
-            margin-bottom: 8px;
+        
+        .results {
+            display: none;
+            text-align: center;
         }
-
-        .spec-card p {
-            color: #9ca3af;
-            font-size: 0.9em;
-        }
-
-        .pros-cons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .pros, .cons {
-            padding: 15px;
-            border-radius: 6px;
-        }
-
-        .pros {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .cons {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .pros h4 {
-            color: #86efac;
-            margin-bottom: 10px;
-        }
-
-        .cons h4 {
-            color: #fca5a5;
-            margin-bottom: 10px;
-        }
-
-        .pros ul, .cons ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .pros li, .cons li {
-            padding: 5px 0;
-            font-size: 0.95em;
-        }
-
-        .pros li:before {
-            content: "✓ ";
-            color: #22c55e;
-            font-weight: bold;
-        }
-
-        .cons li:before {
-            content: "✗ ";
-            color: #ef4444;
-            font-weight: bold;
-        }
-
-        .restart-btn {
-            padding: 14px 36px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 30px auto;
+        
+        .results.active {
             display: block;
         }
-
-        .restart-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .nav-btn {
-            padding: 10px 24px;
-            background: rgba(55, 65, 81, 0.5);
-            color: #e5e7eb;
-            border: 1px solid rgba(75, 85, 99, 0.3);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95em;
-        }
-
-        .nav-btn:hover:not(:disabled) {
-            background: rgba(75, 85, 99, 0.5);
-            border-color: rgba(139, 92, 246, 0.5);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .rating-explanation {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 8px;
-            padding: 20px;
+        
+        .class-result {
+            font-size: 48px;
+            color: #8b5cf6;
             margin: 20px 0;
         }
-
-        .rating-explanation h4 {
-            color: #93c5fd;
-            margin-bottom: 10px;
+        
+        .progress-bar {
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
         }
-
-        .rating-explanation p {
-            color: #dbeafe;
-            font-size: 0.95em;
+        
+        .progress {
+            height: 100%;
+            background: #8b5cf6;
+            transition: width 0.3s;
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .pros-cons {
-                grid-template-columns: 1fr;
-            }
-            
-            .spec-grid {
-                grid-template-columns: 1fr;
-            }
+        
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="start-screen" id="startScreen">
-            <div class="header">
-                <h1>Project Epoch Class Selector</h1>
-                <p class="subtitle">The Ultimate 40-Question Class Finder</p>
-                <div class="info-box">
-                    <p><strong>About this quiz:</strong> Designed specifically for Project Epoch's TBC-at-60 class balance with 61 talent points. 
-                    Every spec is viable in Epoch, so this quiz focuses on finding what playstyle suits YOU best. 
-                    Takes ~5-7 minutes to complete.</p>
-                </div>
-            </div>
-            
-            <p style="color: #9ca3af; margin: 20px 0;">
-                This comprehensive quiz analyzes your preferences across PvE, PvP, solo play, group dynamics, 
-                and gameplay mechanics to find your perfect class match. All questions are weighted based on 
-                extensive Epoch beta testing feedback and class performance data.
-            </p>
-            
+    <div class="container">
+        <h1>Project Epoch - Class Selector Quiz</h1>
+        
+        <div id="startScreen" class="start-screen">
+            <p><strong>35 Questions to find your perfect class and specialization!</strong></p>
+            <p>This quiz analyzes your personality, values, and approach to challenges to match you with the ideal class.</p>
+            <p>Takes about 5-6 minutes to complete.</p>
             <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
         </div>
-
-        <div class="quiz-container" id="quizContainer" style="display: none;">
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span id="questionNumber">Question 1 of 40</span>
-                    <span id="progressPercent">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" id="progressBar"></div>
-                </div>
+        
+        <div id="quizContainer" class="quiz-container">
+            <div class="progress-bar">
+                <div id="progressBar" class="progress"></div>
             </div>
-
             <div id="questionContainer"></div>
-            
-            <div class="navigation-buttons">
-                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
-                <button class="nav-btn" id="skipBtn" onclick="skipQuestion()">Skip Question</button>
-            </div>
         </div>
-
-        <div class="results" id="results">
-            <div class="results-header">
-                <h2 style="color: #a5b4fc;">Your Project Epoch Class Match</h2>
-                <div class="class-result" id="classResult"></div>
-                <p style="color: #9ca3af; font-size: 1.1em;" id="matchPercent"></p>
-            </div>
-
-            <div class="score-breakdown" id="scoreBreakdown">
-                <h3 style="color: #c4b5fd; margin-bottom: 15px;">Class Compatibility Scores</h3>
-                <div id="scoresList"></div>
-            </div>
-
-            <div class="class-info-section">
-                <h3>Class Overview</h3>
-                <p id="classDescription"></p>
-            </div>
-
-            <div class="class-info-section">
-                <h3>Specializations in Project Epoch</h3>
-                <div class="spec-grid" id="specGrid"></div>
-            </div>
-
-            <div class="class-info-section">
-                <h3>Strengths & Considerations</h3>
-                <div class="pros-cons">
-                    <div class="pros">
-                        <h4>Strengths</h4>
-                        <ul id="prosList"></ul>
-                    </div>
-                    <div class="cons">
-                        <h4>Considerations</h4>
-                        <ul id="consList"></ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="class-info-section">
-                <h3>Project Epoch Specific Changes</h3>
-                <p id="epochChanges"></p>
-            </div>
-
-            <div class="class-info-section">
-                <h3>Recommended Race Combinations</h3>
-                <p id="raceRecommendations"></p>
-            </div>
-
-            <div class="rating-explanation">
-                <h4>Why This Class?</h4>
-                <p id="whyThisClass"></p>
-            </div>
-
+        
+        <div id="results" class="results">
+            <h2>Your Perfect Class Is...</h2>
+            <div id="classResult" class="class-result"></div>
+            <div id="classDescription"></div>
             <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
         </div>
     </div>
 
     <script>
+        let currentQuestion = 0;
+        let classScores = {
+            // Warrior specs
+            warrior_protection: 0,
+            warrior_fury: 0,
+            warrior_arms: 0,
+            // Paladin specs  
+            paladin_holy: 0,
+            paladin_protection: 0,
+            paladin_retribution: 0,
+            // Hunter specs
+            hunter_beastmastery: 0,
+            hunter_marksmanship: 0,
+            hunter_survival: 0,
+            // Rogue specs
+            rogue_assassination: 0,
+            rogue_combat: 0,
+            rogue_subtlety: 0,
+            // Priest specs
+            priest_holy: 0,
+            priest_discipline: 0,
+            priest_shadow: 0,
+            // Mage specs
+            mage_arcane: 0,
+            mage_fire: 0,
+            mage_frost: 0,
+            // Warlock specs
+            warlock_affliction: 0,
+            warlock_demonology: 0,
+            warlock_destruction: 0,
+            // Shaman specs
+            shaman_elemental: 0,
+            shaman_enhancement: 0,
+            shaman_restoration: 0,
+            // Druid specs
+            druid_balance: 0,
+            druid_feral: 0,
+            druid_restoration: 0
+        };
+        
         const questions = [
-            // Core Role Questions (1-5)
+            // Personality & Values (1-10)
             {
-                question: "In a 25-man raid, which role gives you the most satisfaction?",
-                context: "Project Epoch uses 25-man raids for major content (MC, BWL, etc.)",
+                question: "When faced with an injustice, what is your first instinct?",
                 answers: [
-                    { text: "Main Tank - Being the focal point and raid leader", points: { warrior: 5, paladin: 3, druid: 2 } },
-                    { text: "Off Tank - Flexible tanking and DPS when needed", points: { warrior: 3, paladin: 4, druid: 4 } },
-                    { text: "Main Healer - Keeping tanks alive through big damage", points: { priest: 5, paladin: 3, shaman: 2, druid: 2 } },
-                    { text: "Raid Healer - Managing multiple health bars efficiently", points: { priest: 3, shaman: 4, druid: 3, paladin: 2 } },
-                    { text: "Pure DPS - Maximizing damage output above all else", points: { rogue: 4, mage: 4, warlock: 4, hunter: 3 } }
+                    { text: "Step forward to protect the innocent, even at personal cost", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, warrior_protection: 4, priest_holy: 3 } },
+                    { text: "Strike from the shadows to eliminate the source", points: { rogue_subtlety: 5, rogue_assassination: 5, priest_shadow: 4, warlock_affliction: 3 } },
+                    { text: "Rally others to fight alongside you for what's right", points: { warrior_fury: 4, warrior_arms: 4, paladin_retribution: 4, shaman_enhancement: 3, priest_holy: 3 } },
+                    { text: "Seek to understand all perspectives before acting", points: { priest_discipline: 5, druid_restoration: 5, druid_balance: 4, shaman_restoration: 4 } },
+                    { text: "Use any means necessary to achieve the greater good", points: { warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 4, rogue_assassination: 3 } }
                 ]
             },
             {
-                question: "How important is being able to fill multiple roles to you?",
+                question: "What motivates you to grow stronger?",
                 answers: [
-                    { text: "Critical - I want to tank, heal, AND DPS depending on needs", points: { druid: 5, paladin: 4, shaman: 3 } },
-                    { text: "Important - I'd like at least two viable role options", points: { warrior: 3, priest: 3, shaman: 3, paladin: 3, druid: 3 } },
-                    { text: "Somewhat - Having an offspec is nice but not essential", points: { shaman: 2, priest: 2, warrior: 2, paladin: 2, druid: 2 } },
-                    { text: "Not at all - I want to master one role perfectly", points: { rogue: 4, mage: 4, warlock: 4, hunter: 4 } }
+                    { text: "To protect those who cannot protect themselves", points: { paladin_protection: 5, paladin_holy: 5, warrior_protection: 4, priest_holy: 4, druid_restoration: 3 } },
+                    { text: "To unlock the deepest mysteries of magic and reality", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
+                    { text: "To achieve perfect mastery over your chosen discipline", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_arcane: 4, warrior_arms: 4, warlock_affliction: 3 } },
+                    { text: "To maintain balance between all forces in the world", points: { druid_balance: 5, druid_restoration: 5, shaman_restoration: 5, shaman_elemental: 4, priest_discipline: 3 } },
+                    { text: "To prove your superiority and claim your rightful place", points: { warrior_fury: 4, rogue_subtlety: 4, warlock_destruction: 4, mage_fire: 4, paladin_retribution: 3 } }
                 ]
             },
             {
-                question: "Your ideal position in a fight?",
+                question: "How do you handle fear in dangerous situations?",
                 answers: [
-                    { text: "In the thick of melee combat", points: { warrior: 4, rogue: 4, paladin: 3, shaman: 2, druid: 2 } },
-                    { text: "At max casting range", points: { mage: 4, warlock: 4, priest: 3, shaman: 2, hunter: 2 } },
-                    { text: "Mid-range with mobility options", points: { hunter: 5, shaman: 3, druid: 2 } },
-                    { text: "Wherever I'm needed most", points: { druid: 4, shaman: 3, paladin: 3 } }
+                    { text: "Channel it into righteous fury against your enemies", points: { paladin_retribution: 5, warrior_fury: 5, warrior_arms: 4, shaman_enhancement: 3 } },
+                    { text: "Suppress it through discipline and training", points: { warrior_protection: 5, paladin_protection: 4, priest_discipline: 4, hunter_survival: 3, rogue_combat: 3 } },
+                    { text: "Use it to heighten your awareness and reflexes", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 4, druid_feral: 3 } },
+                    { text: "Transform it into calculated strategy", points: { mage_frost: 4, hunter_marksmanship: 4, warlock_demonology: 4, priest_discipline: 3, mage_arcane: 3 } },
+                    { text: "Accept it as natural while staying focused on helping others", points: { priest_holy: 5, druid_restoration: 5, shaman_restoration: 5, paladin_holy: 4 } }
                 ]
             },
             {
-                question: "How do you feel about managing threat/aggro?",
+                question: "What is your relationship with authority and rules?",
                 answers: [
-                    { text: "I want to generate maximum threat as a tank", points: { warrior: 5, paladin: 3, druid: 3 } },
-                    { text: "I'm careful about threat but push limits for DPS", points: { rogue: 3, warlock: 3, mage: 3, warrior: 2 } },
-                    { text: "I prefer built-in threat reduction abilities", points: { rogue: 4, hunter: 4, mage: 3, warlock: 2 } },
-                    { text: "I want to ignore threat completely (healer privilege)", points: { priest: 4, paladin: 3, shaman: 3, druid: 3 } }
+                    { text: "Rules exist to protect society and should be upheld", points: { paladin_holy: 5, paladin_protection: 5, warrior_protection: 4, priest_holy: 4, priest_discipline: 3 } },
+                    { text: "Rules are guidelines, but justice sometimes requires breaking them", points: { paladin_retribution: 4, warrior_fury: 4, priest_shadow: 3, rogue_assassination: 3, warlock_affliction: 2 } },
+                    { text: "Authority must be earned through competence and wisdom", points: { mage_arcane: 4, hunter_marksmanship: 4, priest_discipline: 4, warrior_arms: 3, druid_balance: 3 } },
+                    { text: "Rules are chains that limit true potential", points: { rogue_subtlety: 5, warlock_destruction: 4, warlock_affliction: 4, mage_fire: 3, priest_shadow: 3 } },
+                    { text: "Natural law supersedes artificial constructs", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 4, shaman_restoration: 4, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "Your approach to min-maxing and optimization?",
+                question: "How do you prefer to solve complex problems?",
                 answers: [
-                    { text: "I love complex rotations and squeezing out every bit of performance", points: { rogue: 4, warlock: 3, mage: 3, hunter: 2 } },
-                    { text: "I enjoy optimization but prefer intuitive gameplay", points: { warrior: 3, shaman: 3, druid: 3, paladin: 2 } },
-                    { text: "I want straightforward effectiveness without spreadsheets", points: { hunter: 3, paladin: 3, priest: 3, mage: 2 } },
-                    { text: "I prefer reactive gameplay over strict rotations", points: { priest: 4, druid: 3, shaman: 3, paladin: 3 } }
-                ]
-            },
-
-            // PvP Questions (6-10)
-            {
-                question: "In world PvP (1v1), what's your win condition?",
-                context: "Project Epoch features extensive world PvP on the PvP server",
-                answers: [
-                    { text: "Burst them down before they can react", points: { rogue: 5, mage: 3, shaman: 3, warlock: 2 } },
-                    { text: "Outlast them with sustain and healing", points: { druid: 4, paladin: 4, priest: 3, warlock: 3 } },
-                    { text: "Control and kite them to death", points: { mage: 4, hunter: 4, warlock: 3, druid: 2 } },
-                    { text: "Overpower them with superior stats and gear", points: { warrior: 4, paladin: 3, shaman: 2 } }
+                    { text: "Through systematic study and logical analysis", points: { mage_arcane: 5, mage_frost: 4, priest_discipline: 4, warlock_demonology: 4, hunter_marksmanship: 3 } },
+                    { text: "By taking decisive action based on moral conviction", points: { paladin_retribution: 5, paladin_holy: 4, warrior_fury: 4, priest_holy: 3, warrior_arms: 3 } },
+                    { text: "Through careful observation and patient planning", points: { rogue_subtlety: 5, hunter_survival: 4, hunter_marksmanship: 4, rogue_assassination: 3, mage_arcane: 3 } },
+                    { text: "By finding harmony and balance between opposing forces", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4, shaman_elemental: 3 } },
+                    { text: "With overwhelming force applied at the right moment", points: { warrior_fury: 5, mage_fire: 4, warlock_destruction: 4, warrior_arms: 3, paladin_retribution: 3 } }
                 ]
             },
             {
-                question: "Your preferred Battleground role?",
+                question: "What role do you naturally take in group dynamics?",
                 answers: [
-                    { text: "Flag carrier/defender in WSG", points: { druid: 5, warrior: 3, paladin: 3 } },
-                    { text: "Node defender in AB", points: { hunter: 4, warlock: 3, mage: 3, paladin: 2 } },
-                    { text: "Roaming assassin picking off stragglers", points: { rogue: 5, druid: 3, hunter: 2 } },
-                    { text: "Team fighter in large skirmishes", points: { warrior: 3, mage: 3, shaman: 3, priest: 3 } },
-                    { text: "Dedicated healer keeping the team alive", points: { priest: 4, paladin: 3, shaman: 3, druid: 3 } }
+                    { text: "The protector who keeps everyone safe", points: { warrior_protection: 5, paladin_protection: 5, druid_feral: 3, paladin_holy: 2 } },
+                    { text: "The healer who ensures everyone can continue", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5, priest_discipline: 4 } },
+                    { text: "The strategist who plans and coordinates", points: { mage_arcane: 4, priest_discipline: 4, hunter_marksmanship: 4, warlock_demonology: 3, mage_frost: 3 } },
+                    { text: "The specialist who excels at one crucial task", points: { rogue_assassination: 4, hunter_marksmanship: 4, mage_fire: 4, warlock_destruction: 4, rogue_subtlety: 3, warrior_arms: 3 } },
+                    { text: "The versatile member who adapts to fill gaps", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_enhancement: 4, shaman_elemental: 3, shaman_restoration: 3, paladin_retribution: 3 } }
                 ]
             },
             {
-                question: "How do you handle being focused in PvP?",
+                question: "How do you handle personal setbacks and failures?",
                 answers: [
-                    { text: "Vanish/Stealth and reset", points: { rogue: 5, druid: 3 } },
-                    { text: "Ice Block/Bubble and wait for help", points: { mage: 4, paladin: 4 } },
-                    { text: "Tank it with defensive cooldowns", points: { warrior: 4, druid: 3, paladin: 3 } },
-                    { text: "CC them and create distance", points: { mage: 3, hunter: 4, warlock: 3, priest: 2 } },
-                    { text: "Pillar hump and LoS", points: { priest: 3, druid: 3, shaman: 2, warlock: 2 } }
+                    { text: "Use them as fuel for renewed determination", points: { warrior_fury: 5, paladin_retribution: 4, warrior_arms: 4, rogue_combat: 3, shaman_enhancement: 3 } },
+                    { text: "Analyze what went wrong and develop a better approach", points: { mage_arcane: 5, priest_discipline: 4, hunter_marksmanship: 4, mage_frost: 3, warlock_demonology: 3 } },
+                    { text: "Accept them as part of the natural cycle and adapt", points: { druid_balance: 5, druid_restoration: 5, shaman_restoration: 4, shaman_elemental: 3, hunter_survival: 3 } },
+                    { text: "Turn them into opportunities for growth and learning", points: { priest_holy: 4, paladin_holy: 4, priest_discipline: 4, druid_balance: 3, mage_arcane: 3 } },
+                    { text: "Plot carefully to ensure they never happen again", points: { rogue_subtlety: 5, warlock_affliction: 4, priest_shadow: 4, rogue_assassination: 3 } }
                 ]
             },
             {
-                question: "Your thoughts on crowd control in PvP?",
+                question: "What draws you to magic or supernatural forces?",
                 answers: [
-                    { text: "I want the longest, most reliable CC", points: { mage: 5, rogue: 4, warlock: 2 } },
-                    { text: "I prefer instant, no-cast-time CC", points: { rogue: 4, paladin: 3, warrior: 3, hunter: 2 } },
-                    { text: "I need CC breaks and immunities", points: { warrior: 3, paladin: 3, mage: 3, rogue: 3 } },
-                    { text: "I rely on slows and roots more than hard CC", points: { hunter: 4, druid: 3, shaman: 3, mage: 2 } }
+                    { text: "The pursuit of absolute knowledge and understanding", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 3, priest_discipline: 3 } },
+                    { text: "Divine connection and service to higher powers", points: { priest_holy: 5, paladin_holy: 5, priest_discipline: 4, paladin_protection: 3 } },
+                    { text: "Harmony with the natural world and its spirits", points: { druid_balance: 5, druid_restoration: 5, shaman_elemental: 5, shaman_restoration: 5, shaman_enhancement: 4, druid_feral: 3 } },
+                    { text: "Power that can be harnessed for personal goals", points: { warlock_destruction: 5, warlock_affliction: 4, mage_fire: 4, priest_shadow: 4, warlock_demonology: 3 } },
+                    { text: "I prefer to rely on physical skill and training", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 4, rogue_assassination: 4, hunter_marksmanship: 3, hunter_survival: 3, hunter_beastmastery: 3, rogue_subtlety: 3 } }
                 ]
             },
             {
-                question: "Arena 2v2 partner preference?",
-                context: "Epoch will have arena seasons",
+                question: "How do you view your place in the larger conflict between good and evil?",
                 answers: [
-                    { text: "Healer - I'll be the damage", points: { warrior: 4, rogue: 4, mage: 3, warlock: 3, hunter: 3 } },
-                    { text: "DPS - I'll be the healer", points: { priest: 4, druid: 4, paladin: 4, shaman: 3 } },
-                    { text: "Another DPS for maximum pressure", points: { rogue: 3, mage: 3, warlock: 2 } },
-                    { text: "Hybrid for flexibility", points: { druid: 3, shaman: 3, paladin: 3 } }
-                ]
-            },
-
-            // Solo/Leveling Questions (11-15)
-            {
-                question: "Your approach to leveling 1-60?",
-                answers: [
-                    { text: "Efficient mob grinding with minimal downtime", points: { hunter: 5, warlock: 4, mage: 3, druid: 2 } },
-                    { text: "Dungeon cleave groups for fast experience", points: { mage: 4, warrior: 3, priest: 3, paladin: 2 } },
-                    { text: "Quest efficiently with good survivability", points: { paladin: 4, druid: 3, shaman: 3, hunter: 3 } },
-                    { text: "PvP while leveling on contested zones", points: { rogue: 4, hunter: 3, druid: 3, mage: 2 } },
-                    { text: "Take my time and enjoy the journey", points: { priest: 2, shaman: 2, druid: 2, paladin: 2 } }
+                    { text: "A champion of light standing against darkness", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4, warrior_protection: 2 } },
+                    { text: "A seeker of balance who opposes extremes", points: { druid_balance: 5, druid_restoration: 4, priest_discipline: 4, shaman_restoration: 4, shaman_elemental: 3 } },
+                    { text: "One who embraces darker methods for necessary ends", points: { priest_shadow: 5, warlock_affliction: 5, warlock_destruction: 4, rogue_subtlety: 4, warlock_demonology: 3 } },
+                    { text: "A pragmatist who focuses on survival and results", points: { rogue_assassination: 4, hunter_survival: 4, warrior_fury: 3, rogue_combat: 3, hunter_marksmanship: 3 } },
+                    { text: "An observer who studies all sides before choosing", points: { mage_arcane: 4, mage_frost: 4, priest_discipline: 4, hunter_marksmanship: 3, druid_balance: 3 } }
                 ]
             },
             {
-                question: "How important is solo farming capability at 60?",
+                question: "What is your greatest strength in times of crisis?",
                 answers: [
-                    { text: "Essential - I need to farm gold efficiently", points: { mage: 5, hunter: 4, warlock: 3, druid: 2 } },
-                    { text: "Important - I want to solo elites and rares", points: { hunter: 4, warlock: 4, paladin: 3, druid: 3 } },
-                    { text: "Moderate - Some farming ability is nice", points: { shaman: 3, priest: 2, warrior: 2, rogue: 3 } },
-                    { text: "Unimportant - I'll farm in groups or play the AH", points: { warrior: 3, priest: 3, rogue: 2 } }
-                ]
-            },
-            {
-                question: "Preferred method of handling elite quests?",
-                answers: [
-                    { text: "Solo them with pet tanking", points: { hunter: 5, warlock: 4 } },
-                    { text: "Kite them with slows and range", points: { mage: 4, hunter: 3, druid: 2, shaman: 2 } },
-                    { text: "Tank and sustain through the damage", points: { paladin: 4, druid: 3, warrior: 3 } },
-                    { text: "Find a group - it's an MMO", points: { priest: 3, rogue: 3, shaman: 2, warrior: 2 } }
-                ]
-            },
-            {
-                question: "Your ideal world buff collecting routine?",
-                context: "Epoch has world buffs like Onyxia/Nef head, DMT, Songflower",
-                answers: [
-                    { text: "I'll be fully buffed for every raid", points: { warrior: 4, rogue: 4, mage: 3 } },
-                    { text: "I'll get the easy ones but won't stress", points: { hunter: 3, warlock: 3, shaman: 3, paladin: 3 } },
-                    { text: "Only if the guild requires it", points: { priest: 3, druid: 3, paladin: 2 } },
-                    { text: "I prefer not to deal with buff meta", points: { priest: 2, druid: 2, shaman: 2, paladin: 2 } }
-                ]
-            },
-            {
-                question: "Thoughts on consumable usage?",
-                answers: [
-                    { text: "Full consume every raid - flasks, food, everything", points: { warrior: 3, rogue: 3, mage: 3, warlock: 3 } },
-                    { text: "Reasonable consumables based on content", points: { hunter: 3, priest: 3, shaman: 3, paladin: 3, druid: 3 } },
-                    { text: "Minimal - only for progression", points: { druid: 2, paladin: 2, shaman: 2 } },
-                    { text: "I'll bring consumables for others (healthstones, water)", points: { warlock: 3, mage: 3 } }
+                    { text: "Unwavering courage in the face of overwhelming odds", points: { warrior_protection: 5, paladin_protection: 5, warrior_fury: 4, paladin_retribution: 4, warrior_arms: 3 } },
+                    { text: "Quick thinking and adaptability to changing situations", points: { rogue_subtlety: 5, druid_balance: 4, druid_feral: 4, priest_discipline: 4, shaman_enhancement: 3 } },
+                    { text: "Deep knowledge that provides solutions others miss", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, hunter_survival: 3 } },
+                    { text: "Compassionate healing that keeps hope alive", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5 } },
+                    { text: "Precise execution when everything depends on performance", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_fire: 4, warlock_destruction: 4, warrior_arms: 3 } }
                 ]
             },
 
-            // Class Mechanics Questions (16-25)
+            // Combat Philosophy & Approach (11-20)
             {
-                question: "Your preferred resource system?",
+                question: "What is your philosophy on dealing with enemies?",
                 answers: [
-                    { text: "Rage - builds in combat", points: { warrior: 5, druid: 2 } },
-                    { text: "Energy/Combo Points - fast regeneration and planning", points: { rogue: 5, druid: 3 } },
-                    { text: "Mana - large pool for sustained casting", points: { mage: 4, priest: 4, warlock: 3, shaman: 3, paladin: 3, druid: 2 } },
-                    { text: "Focus/Pet mechanics", points: { hunter: 5 } },
-                    { text: "Mixed resources depending on form/stance", points: { druid: 4, warrior: 2 } }
+                    { text: "Face them honorably in direct combat", points: { warrior_fury: 5, warrior_arms: 5, paladin_retribution: 4, warrior_protection: 3, rogue_combat: 3 } },
+                    { text: "Strike swiftly before they know you're there", points: { rogue_assassination: 5, rogue_subtlety: 5, hunter_marksmanship: 3, druid_feral: 3 } },
+                    { text: "Overwhelm them with superior magical power", points: { mage_fire: 5, warlock_destruction: 5, mage_arcane: 4, shaman_elemental: 4, warlock_demonology: 3 } },
+                    { text: "Outlast them through superior defense and endurance", points: { warrior_protection: 5, paladin_protection: 5, priest_discipline: 3, druid_feral: 3 } },
+                    { text: "Weaken them gradually until victory is inevitable", points: { warlock_affliction: 5, priest_shadow: 4, hunter_survival: 3, druid_balance: 3, rogue_subtlety: 3 } }
                 ]
             },
             {
-                question: "How do you feel about pet/minion management?",
-                context: "Epoch has expanded pet families for hunters and improved pet AI",
+                question: "How do you prepare for a dangerous encounter?",
                 answers: [
-                    { text: "Love it - pets are a core part of my gameplay", points: { hunter: 5, warlock: 4 } },
-                    { text: "Temporary pets/minions are fine", points: { shaman: 3, mage: 2, priest: 2 } },
-                    { text: "I prefer totems/stationary helpers", points: { shaman: 4 } },
-                    { text: "No pets - I want direct control", points: { rogue: 3, warrior: 3, paladin: 3, priest: 2, mage: 2 } }
+                    { text: "Through intensive training and perfecting your techniques", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, paladin_retribution: 4, hunter_marksmanship: 3 } },
+                    { text: "By studying your opponents and planning countermeasures", points: { mage_arcane: 5, mage_frost: 4, hunter_marksmanship: 4, priest_discipline: 4, warlock_demonology: 3 } },
+                    { text: "Through meditation and spiritual preparation", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, druid_balance: 4 } },
+                    { text: "By gathering intelligence and scouting thoroughly", points: { rogue_subtlety: 5, hunter_survival: 4, rogue_assassination: 4, hunter_beastmastery: 3 } },
+                    { text: "Through seeking power from any available source", points: { warlock_affliction: 4, warlock_destruction: 4, warlock_demonology: 4, priest_shadow: 4, mage_fire: 3 } }
                 ]
             },
             {
-                question: "Stance/Form dancing and shapeshifting?",
+                question: "What gives you confidence in battle?",
                 answers: [
-                    { text: "Constantly shifting is engaging gameplay", points: { druid: 5, warrior: 3 } },
-                    { text: "Occasional stance swaps for utility", points: { warrior: 3, priest: 2 } },
-                    { text: "I prefer to stay in one form/stance", points: { mage: 3, warlock: 3, hunter: 3, rogue: 3 } },
-                    { text: "No stances - straightforward gameplay", points: { paladin: 3, shaman: 3, hunter: 2 } }
+                    { text: "Superior equipment and physical conditioning", points: { warrior_protection: 4, warrior_arms: 4, warrior_fury: 4, paladin_protection: 3, rogue_combat: 3 } },
+                    { text: "Extensive magical knowledge and preparation", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
+                    { text: "Faith in divine guidance and righteousness", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4 } },
+                    { text: "Perfect technique and countless hours of practice", points: { rogue_assassination: 5, hunter_marksmanship: 5, warrior_arms: 4, rogue_subtlety: 3, rogue_combat: 3 } },
+                    { text: "Deep connection to natural forces", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 5, shaman_enhancement: 4, shaman_restoration: 4 } }
                 ]
             },
             {
-                question: "Your thoughts on Damage over Time effects?",
+                question: "How do you handle multiple threats simultaneously?",
                 answers: [
-                    { text: "DoT management is my primary damage", points: { warlock: 5, priest: 3 } },
-                    { text: "Mix of DoTs and direct damage", points: { druid: 3, warlock: 3, priest: 3, hunter: 2 } },
-                    { text: "Prefer instant burst damage", points: { rogue: 4, mage: 3, shaman: 3, warrior: 3 } },
-                    { text: "Sustained direct damage", points: { hunter: 3, paladin: 3, warrior: 2 } }
+                    { text: "Devastating area attacks that hit everything at once", points: { mage_fire: 5, mage_frost: 4, warlock_destruction: 4, shaman_elemental: 4, warrior_fury: 3 } },
+                    { text: "Control the battlefield to fight them one at a time", points: { mage_frost: 4, warrior_protection: 4, paladin_protection: 4, priest_discipline: 3, hunter_survival: 3 } },
+                    { text: "Quick strikes to eliminate the most dangerous first", points: { rogue_assassination: 5, rogue_subtlety: 4, hunter_marksmanship: 4, warrior_arms: 3 } },
+                    { text: "Spread damage over time effects across all of them", points: { warlock_affliction: 5, druid_balance: 4, priest_shadow: 4, hunter_survival: 3 } },
+                    { text: "Survive while allies eliminate the threats", points: { warrior_protection: 5, paladin_protection: 5, priest_holy: 3, priest_discipline: 3 } }
                 ]
             },
             {
-                question: "Preferred casting style?",
+                question: "What is your preferred distance from danger?",
                 answers: [
-                    { text: "Long cast times for big numbers", points: { mage: 4, warlock: 3, priest: 2 } },
-                    { text: "Instant casts with mobility", points: { shaman: 3, druid: 3, hunter: 3 } },
-                    { text: "Mix of instant and casted abilities", points: { shaman: 4, druid: 3, priest: 3, warlock: 3 } },
-                    { text: "No casting - pure physical", points: { rogue: 5, warrior: 5 } },
-                    { text: "Channeled abilities", points: { warlock: 3, priest: 3, mage: 2 } }
+                    { text: "In the thick of melee combat where I can protect others", points: { warrior_protection: 5, paladin_protection: 5, druid_feral: 4, warrior_fury: 3, paladin_retribution: 3 } },
+                    { text: "Close enough to strike with weapons but mobile", points: { warrior_fury: 4, warrior_arms: 4, rogue_combat: 4, rogue_assassination: 4, paladin_retribution: 4, shaman_enhancement: 4 } },
+                    { text: "At maximum spell range where I can see everything", points: { mage_arcane: 5, mage_fire: 5, mage_frost: 5, warlock_destruction: 4, warlock_affliction: 4, shaman_elemental: 4, priest_shadow: 4 } },
+                    { text: "At optimal range for precision strikes", points: { hunter_marksmanship: 5, hunter_survival: 5, hunter_beastmastery: 5 } },
+                    { text: "Close enough to help but safe enough to keep helping", points: { priest_holy: 4, priest_discipline: 4, druid_restoration: 4, shaman_restoration: 4, paladin_holy: 3 } }
                 ]
             },
             {
-                question: "How do you feel about positional requirements?",
+                question: "How do you deal with overwhelming opposition?",
                 answers: [
-                    { text: "I love the skill expression of backstab positioning", points: { rogue: 5, druid: 2 } },
-                    { text: "Some positional requirements are fine", points: { warrior: 3, druid: 3, rogue: 3 } },
-                    { text: "I prefer to attack from any angle", points: { warrior: 3, paladin: 4, shaman: 3 } },
-                    { text: "Ranged - positioning is about range not angle", points: { mage: 4, warlock: 4, priest: 4, hunter: 4 } }
+                    { text: "Stand your ground and weather the storm", points: { warrior_protection: 5, paladin_protection: 5, warrior_fury: 3, priest_discipline: 3 } },
+                    { text: "Strike hard and fast before they can organize", points: { warrior_fury: 5, rogue_assassination: 4, mage_fire: 4, warlock_destruction: 4, paladin_retribution: 3 } },
+                    { text: "Use superior tactics and positioning", points: { hunter_survival: 5, hunter_marksmanship: 4, rogue_subtlety: 4, mage_frost: 4, priest_discipline: 3 } },
+                    { text: "Disappear and return when the odds are better", points: { rogue_subtlety: 5, rogue_assassination: 4, druid_feral: 3, hunter_survival: 3 } },
+                    { text: "Focus on keeping your allies in the fight", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5, priest_discipline: 4 } }
                 ]
             },
             {
-                question: "Your ideal buff contribution to a group?",
-                context: "Epoch makes many buffs raid-wide",
+                question: "What drives your combat technique?",
                 answers: [
-                    { text: "Massive stat increases (Kings, MotW)", points: { paladin: 4, druid: 4 } },
-                    { text: "Unique damage multipliers (Windfury, TSA)", points: { shaman: 4, hunter: 3 } },
-                    { text: "Sustain and resources (Wisdom, Mana Spring)", points: { paladin: 3, shaman: 3 } },
-                    { text: "Defensive buffs (Fort, Spirit)", points: { priest: 4, paladin: 2 } },
-                    { text: "Utility (portals, water, healthstones)", points: { mage: 4, warlock: 4 } }
+                    { text: "Raw emotion and passionate intensity", points: { warrior_fury: 5, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 3, shaman_enhancement: 3 } },
+                    { text: "Precise calculation and perfect execution", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_arcane: 4, warrior_arms: 4, mage_frost: 3 } },
+                    { text: "Deep spiritual connection and inner peace", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4, monk_mistweaver: 0 } },
+                    { text: "Adaptation and flowing with the moment", points: { druid_feral: 5, druid_balance: 4, shaman_enhancement: 4, priest_discipline: 3, rogue_subtlety: 3 } },
+                    { text: "Methodical application of learned techniques", points: { warrior_protection: 4, paladin_protection: 4, rogue_combat: 4, hunter_survival: 3, warlock_demonology: 3 } }
                 ]
             },
             {
-                question: "Cooldown management preference?",
+                question: "How do you recover from being wounded or depleted?",
                 answers: [
-                    { text: "Multiple short cooldowns to weave", points: { rogue: 4, hunter: 3, shaman: 3 } },
-                    { text: "One or two major cooldowns to time perfectly", points: { warrior: 4, mage: 3, priest: 3 } },
-                    { text: "Passive power with few cooldowns", points: { warlock: 3, hunter: 3, paladin: 2 } },
-                    { text: "Situational utility cooldowns", points: { paladin: 3, druid: 3, shaman: 3, priest: 3 } }
+                    { text: "Channel inner rage to push through the pain", points: { warrior_fury: 5, warrior_arms: 3, paladin_retribution: 3, shaman_enhancement: 3 } },
+                    { text: "Use magical healing to restore yourself", points: { priest_holy: 4, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 3 } },
+                    { text: "Draw power from external sources", points: { warlock_affliction: 4, warlock_destruction: 3, warlock_demonology: 4, priest_shadow: 4 } },
+                    { text: "Wait patiently for natural regeneration", points: { hunter_survival: 4, druid_balance: 3, druid_restoration: 3, shaman_restoration: 3, rogue_subtlety: 2 } },
+                    { text: "Rely on protective gear and defensive positioning", points: { warrior_protection: 5, paladin_protection: 5, hunter_survival: 3, mage_frost: 3 } }
                 ]
             },
             {
-                question: "Your approach to AoE/Cleave damage?",
+                question: "What is your ideal end to a conflict?",
                 answers: [
-                    { text: "Massive AoE is my specialty", points: { mage: 5, warlock: 3, paladin: 2 } },
-                    { text: "Strong cleave in melee range", points: { warrior: 4, paladin: 3, shaman: 2 } },
-                    { text: "Limited but effective AoE", points: { hunter: 3, priest: 2, druid: 2, shaman: 3 } },
-                    { text: "Single target focused with minimal AoE", points: { rogue: 4, druid: 2 } }
+                    { text: "Complete and decisive victory over your enemies", points: { warrior_fury: 4, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 4, rogue_assassination: 3 } },
+                    { text: "Justice served and the innocent protected", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4, warrior_protection: 3 } },
+                    { text: "Balance restored and harmony achieved", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 4, shaman_elemental: 3 } },
+                    { text: "Your objectives accomplished with minimal losses", points: { rogue_subtlety: 4, hunter_survival: 4, mage_arcane: 4, priest_discipline: 3, warlock_demonology: 3 } },
+                    { text: "Complete elimination of the threat", points: { rogue_assassination: 5, warrior_arms: 4, hunter_marksmanship: 4, mage_fire: 3, warlock_destruction: 3 } }
                 ]
             },
             {
-                question: "Preferred defensive toolkit?",
+                question: "How do you view the use of deception in conflict?",
                 answers: [
-                    { text: "Complete immunities (Bubble, Ice Block)", points: { paladin: 5, mage: 5 } },
-                    { text: "Stealth and escape tools", points: { rogue: 5, druid: 3 } },
-                    { text: "High armor and defensive stance", points: { warrior: 4, druid: 3, paladin: 2 } },
-                    { text: "Shields and damage reduction", points: { priest: 4, warlock: 3, mage: 2 } },
-                    { text: "Mobility and kiting tools", points: { hunter: 4, druid: 3, shaman: 2 } }
-                ]
-            },
-
-            // Group Dynamics Questions (26-30)
-            {
-                question: "Your ideal 5-man dungeon group composition includes you as?",
-                answers: [
-                    { text: "The tank leading pulls", points: { warrior: 5, paladin: 3, druid: 3 } },
-                    { text: "The healer keeping everyone up", points: { priest: 4, paladin: 3, shaman: 3, druid: 3 } },
-                    { text: "Primary DPS and CC", points: { mage: 4, rogue: 4, warlock: 3, hunter: 3 } },
-                    { text: "Flexible hybrid filling gaps", points: { druid: 4, shaman: 4, paladin: 3 } },
-                    { text: "Utility and support DPS", points: { hunter: 3, warlock: 3, shaman: 3 } }
-                ]
-            },
-            {
-                question: "How do you handle loot competition?",
-                context: "Epoch uses TBC itemization at 60",
-                answers: [
-                    { text: "Minimal competition - unique tier sets", points: { hunter: 3, warlock: 3, mage: 3, priest: 3 } },
-                    { text: "I can use multiple armor types effectively", points: { warrior: 3, paladin: 3, shaman: 3 } },
-                    { text: "I'm flexible with multiple viable stat priorities", points: { druid: 4, shaman: 3, paladin: 3 } },
-                    { text: "I compete with many classes but I'll earn it", points: { rogue: 3, warrior: 3 } }
-                ]
-            },
-            {
-                question: "Your contribution to raid preparation?",
-                answers: [
-                    { text: "Summoning and healthstones", points: { warlock: 5 } },
-                    { text: "Food, water, and portals", points: { mage: 5 } },
-                    { text: "Buffs and auras", points: { paladin: 4, priest: 3, druid: 3 } },
-                    { text: "Consumables crafting (alchemy, etc)", points: { shaman: 2, druid: 2, priest: 2, warlock: 2 } },
-                    { text: "Strategy and raid leading", points: { warrior: 3, paladin: 2 } }
-                ]
-            },
-            {
-                question: "How do you handle raid wipes?",
-                answers: [
-                    { text: "Ankh/Soulstone for recovery", points: { shaman: 4, warlock: 4 } },
-                    { text: "Divine Intervention to save buffs", points: { paladin: 5 } },
-                    { text: "Stealth/Feign Death to avoid repair bills", points: { rogue: 4, druid: 3, hunter: 4 } },
-                    { text: "Quick ghost run - I know shortcuts", points: { mage: 2, priest: 2, warrior: 2 } }
-                ]
-            },
-            {
-                question: "Your preferred guild role?",
-                answers: [
-                    { text: "Main tank or raid leader", points: { warrior: 4, paladin: 2 } },
-                    { text: "Healing officer coordinating assignments", points: { priest: 4, paladin: 3, shaman: 2, druid: 2 } },
-                    { text: "DPS competing for top meters", points: { rogue: 4, mage: 4, warlock: 4, hunter: 3 } },
-                    { text: "Flexible player filling needed roles", points: { druid: 5, shaman: 4, paladin: 3 } },
-                    { text: "PvP team leader or coordinator", points: { rogue: 3, mage: 3, warrior: 3 } }
+                    { text: "Deception is cowardly - victory should be earned honorably", points: { paladin_holy: 5, paladin_protection: 4, paladin_retribution: 4, warrior_protection: 4, warrior_fury: 3 } },
+                    { text: "Misdirection is a legitimate tactical advantage", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 4, mage_frost: 3, priest_discipline: 3 } },
+                    { text: "Illusion and manipulation are tools like any other", points: { mage_arcane: 4, warlock_affliction: 4, priest_shadow: 4, warlock_demonology: 3, rogue_subtlety: 3 } },
+                    { text: "Sometimes necessary but should be used sparingly", points: { priest_discipline: 4, druid_balance: 4, hunter_marksmanship: 3, warrior_arms: 3 } },
+                    { text: "Whatever works to achieve your goals is acceptable", points: { warlock_affliction: 4, warlock_destruction: 3, priest_shadow: 4, rogue_assassination: 3, warlock_demonology: 3 } }
                 ]
             },
 
-            // Epoch-Specific Questions (31-35)
+            // Power & Mastery (21-30)
             {
-                question: "How do you feel about Epoch's 61 talent point system?",
-                context: "You get 61 points at 60, allowing deeper builds",
+                question: "What type of mastery do you find most appealing?",
                 answers: [
-                    { text: "Excited to go deep in one tree with extras", points: { rogue: 3, mage: 3, warlock: 3, warrior: 3 } },
-                    { text: "Love the hybrid potential with more points", points: { druid: 4, shaman: 4, paladin: 4, priest: 3 } },
-                    { text: "More points for utility talents is great", points: { hunter: 3, priest: 3, paladin: 3 } },
-                    { text: "I'll follow proven builds from the community", points: { warrior: 2, rogue: 2, mage: 2 } }
+                    { text: "Perfect control over the elements and natural forces", points: { shaman_elemental: 5, shaman_restoration: 4, druid_balance: 5, mage_frost: 4, mage_fire: 3 } },
+                    { text: "Unbreakable martial discipline and weapon mastery", points: { warrior_arms: 5, warrior_fury: 4, warrior_protection: 4, paladin_retribution: 4, rogue_combat: 3 } },
+                    { text: "Divine connection and righteous power", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3, priest_discipline: 3 } },
+                    { text: "Arcane knowledge that transcends mortal understanding", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
+                    { text: "Shadow mastery and forbidden techniques", points: { priest_shadow: 5, warlock_affliction: 5, rogue_subtlety: 4, warlock_destruction: 4, warlock_demonology: 3 } }
                 ]
             },
             {
-                question: "Thoughts on Epoch's new race/class combinations?",
-                context: "Undead Paladin, Dwarf Shaman, Human Hunter, etc.",
+                question: "How do you prefer to gain new abilities?",
                 answers: [
-                    { text: "Undead Paladin sounds amazing", points: { paladin: 5 } },
-                    { text: "Dwarf Shaman for Alliance shamans!", points: { shaman: 5 } },
-                    { text: "Human/Undead Hunter for new animations", points: { hunter: 4 } },
-                    { text: "Troll Warlock or other new combos", points: { warlock: 3, priest: 2 } },
-                    { text: "I'll stick with classic combinations", points: { druid: 2, rogue: 2, warrior: 2, mage: 2 } }
+                    { text: "Through rigorous training and endless practice", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, hunter_marksmanship: 4, paladin_retribution: 3 } },
+                    { text: "By studying ancient texts and magical theory", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, priest_holy: 3 } },
+                    { text: "Through spiritual communion and divine inspiration", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 3 } },
+                    { text: "By forming pacts and bargaining for power", points: { warlock_affliction: 5, warlock_destruction: 4, warlock_demonology: 4, priest_shadow: 4 } },
+                    { text: "Through harmony with nature and its cycles", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 5, shaman_enhancement: 4, shaman_restoration: 3, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "Your interest in Epoch's custom content?",
-                context: "New dungeons, Uldum raid, expanded zones",
+                question: "What drives your pursuit of power?",
                 answers: [
-                    { text: "I'm here specifically for the new content", points: { druid: 2, paladin: 2, shaman: 2, priest: 2 } },
-                    { text: "Excited for new BiS lists and gearing paths", points: { warrior: 3, rogue: 3, mage: 3, warlock: 3 } },
-                    { text: "Looking forward to exploring new zones", points: { hunter: 3, druid: 3 } },
-                    { text: "Mainly interested in class changes", points: { shaman: 3, paladin: 3, druid: 3 } }
+                    { text: "The responsibility to protect those weaker than yourself", points: { paladin_protection: 5, warrior_protection: 5, paladin_holy: 4, priest_holy: 4, druid_restoration: 3 } },
+                    { text: "Intellectual curiosity and the joy of discovery", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, druid_balance: 3 } },
+                    { text: "The desire to right wrongs and bring justice", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 4, warrior_fury: 3, priest_discipline: 3 } },
+                    { text: "Personal ambition and the will to dominate", points: { warlock_destruction: 4, warrior_fury: 4, mage_fire: 4, rogue_assassination: 3, warlock_affliction: 3 } },
+                    { text: "Understanding your place in the greater cosmic order", points: { druid_balance: 5, priest_discipline: 4, shaman_elemental: 4, shaman_restoration: 4, druid_restoration: 3 } }
                 ]
             },
             {
-                question: "How will you handle Epoch Time (3-hour day/night)?",
-                context: "Accelerated day/night affects some quests and spawns",
+                question: "How do you handle the corrupting influence of power?",
                 answers: [
-                    { text: "Plan farming around it for rare spawns", points: { hunter: 3, druid: 2, rogue: 2 } },
-                    { text: "Use it for RP and immersion", points: { paladin: 2, priest: 2, druid: 2 } },
-                    { text: "Mostly ignore it unless required", points: { warrior: 2, mage: 2, warlock: 2 } },
-                    { text: "Take advantage of night-only content", points: { rogue: 3, druid: 3, hunter: 2 } }
+                    { text: "Stay grounded through service to others", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 3 } },
+                    { text: "Maintain strict personal discipline and codes", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, warrior_arms: 3, hunter_marksmanship: 3 } },
+                    { text: "Accept that power changes you but try to use it wisely", points: { priest_discipline: 4, druid_balance: 4, mage_arcane: 3, shaman_elemental: 3, warlock_demonology: 3 } },
+                    { text: "Embrace the change as necessary evolution", points: { priest_shadow: 4, warlock_affliction: 4, warlock_destruction: 4, mage_fire: 3, warlock_demonology: 3 } },
+                    { text: "Power is just a tool - corruption comes from weakness", points: { rogue_subtlety: 4, rogue_assassination: 4, hunter_survival: 3, mage_arcane: 3 } }
                 ]
             },
             {
-                question: "Your approach to Epoch's class changes?",
-                context: "TBC abilities at 60, new spells like Warrior's Heroic Leap",
+                question: "What is your relationship with magical or supernatural allies?",
                 answers: [
-                    { text: "Excited for Warriors with Spell Reflection and Heroic Leap", points: { warrior: 5 } },
-                    { text: "Shaman with viable Enhancement sounds great", points: { shaman: 5 } },
-                    { text: "Druids with better itemization finally", points: { druid: 5 } },
-                    { text: "Hunters with expanded pet families", points: { hunter: 5 } },
-                    { text: "Standard TBC class design is already perfect", points: { rogue: 3, mage: 3, warlock: 3, priest: 3, paladin: 3 } }
+                    { text: "I prefer to work with other mortals who share my values", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 3, paladin_retribution: 3 } },
+                    { text: "Divine beings guide and protect those who serve righteously", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Nature spirits are partners in maintaining balance", points: { druid_balance: 5, druid_restoration: 4, druid_feral: 4, shaman_elemental: 5, shaman_restoration: 5, shaman_enhancement: 4 } },
+                    { text: "Demons and dark entities are tools to be controlled", points: { warlock_demonology: 5, warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 3 } },
+                    { text: "Wild creatures understand the world better than civilization", points: { hunter_beastmastery: 5, hunter_survival: 4, druid_feral: 4, hunter_marksmanship: 3 } }
+                ]
+            },
+            {
+                question: "How do you view your own mortality?",
+                answers: [
+                    { text: "Death is the ultimate enemy to be fought at every turn", points: { priest_holy: 5, paladin_holy: 4, warrior_fury: 3, warrior_protection: 3 } },
+                    { text: "Death gives life meaning - accept it but don't seek it", points: { druid_balance: 5, druid_restoration: 4, priest_discipline: 4, shaman_restoration: 4, warrior_arms: 3 } },
+                    { text: "Death is a transition to be prepared for and understood", points: { priest_shadow: 4, druid_balance: 4, warlock_affliction: 3, shaman_elemental: 3 } },
+                    { text: "Immortality through great deeds and remembered legacy", points: { paladin_retribution: 4, warrior_fury: 4, mage_arcane: 3, rogue_assassination: 3 } },
+                    { text: "Death can be cheated through sufficient power", points: { warlock_affliction: 4, warlock_destruction: 3, warlock_demonology: 4, priest_shadow: 4, mage_arcane: 3 } }
+                ]
+            },
+            {
+                question: "What is the source of your inner strength?",
+                answers: [
+                    { text: "Unshakeable faith in divine purpose", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Deep connection to the natural world", points: { druid_balance: 5, druid_restoration: 5, shaman_elemental: 5, shaman_restoration: 5, druid_feral: 4, shaman_enhancement: 3, hunter_survival: 3 } },
+                    { text: "Intellectual understanding and rational thought", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "Personal will and determination to succeed", points: { warrior_fury: 5, warrior_arms: 4, rogue_assassination: 4, warlock_destruction: 4, hunter_marksmanship: 3 } },
+                    { text: "Acceptance of darkness as part of existence", points: { priest_shadow: 5, warlock_affliction: 5, rogue_subtlety: 4, warlock_demonology: 3 } }
+                ]
+            },
+            {
+                question: "How do you handle the responsibility that comes with great power?",
+                answers: [
+                    { text: "Use it selflessly in service of the greater good", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, druid_restoration: 4, priest_discipline: 3 } },
+                    { text: "Wield it carefully with full awareness of consequences", points: { priest_discipline: 5, druid_balance: 5, mage_arcane: 4, paladin_protection: 3, shaman_restoration: 3 } },
+                    { text: "Power should be used to achieve your goals efficiently", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3, warlock_destruction: 3 } },
+                    { text: "Great power demands great ambition", points: { warlock_destruction: 4, mage_fire: 4, warrior_fury: 4, rogue_subtlety: 3, warlock_affliction: 3 } },
+                    { text: "Responsibility is a burden that weakens resolve", points: { priest_shadow: 4, warlock_affliction: 4, rogue_subtlety: 4, warlock_demonology: 3 } }
+                ]
+            },
+            {
+                question: "What legacy do you want to leave behind?",
+                answers: [
+                    { text: "A world made safer through your protection and sacrifice", points: { paladin_protection: 5, warrior_protection: 5, paladin_holy: 4, priest_holy: 4 } },
+                    { text: "Knowledge and wisdom that advances understanding", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3 } },
+                    { text: "Balance restored between the forces of nature", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, shaman_elemental: 4 } },
+                    { text: "Legends of your unmatched skill and achievements", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3, paladin_retribution: 3 } },
+                    { text: "Fear in the hearts of those who would oppose you", points: { warrior_fury: 4, warlock_destruction: 4, priest_shadow: 4, rogue_subtlety: 3, warlock_affliction: 3 } }
+                ]
+            },
+            {
+                question: "How do you define true mastery?",
+                answers: [
+                    { text: "When your abilities serve something greater than yourself", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 4 } },
+                    { text: "When you understand the deeper principles behind your power", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3, warlock_demonology: 3 } },
+                    { text: "When you can execute perfectly under any circumstances", points: { rogue_assassination: 5, hunter_marksmanship: 5, warrior_arms: 4, rogue_subtlety: 3, rogue_combat: 3 } },
+                    { text: "When others look to you for leadership and guidance", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, paladin_retribution: 3 } },
+                    { text: "When you have transcended the limitations of mortality", points: { warlock_affliction: 4, priest_shadow: 4, mage_arcane: 4, warlock_demonology: 4, warlock_destruction: 3 } }
                 ]
             },
 
-            // Endgame Focus Questions (36-40)
+            // Final Character Essence (31-35)
             {
-                question: "Your primary endgame focus will be?",
+                question: "In your ideal story, you would be remembered as:",
                 answers: [
-                    { text: "Hardcore raiding progression", points: { warrior: 3, rogue: 3, mage: 3, warlock: 3, priest: 3 } },
-                    { text: "PvP ranking and Arena", points: { rogue: 4, mage: 3, warrior: 3, priest: 3 } },
-                    { text: "Gold farming and economy", points: { mage: 4, hunter: 4, warlock: 3 } },
-                    { text: "Alt leveling and variety", points: { druid: 3, paladin: 3, shaman: 3 } },
-                    { text: "Social and guild activities", points: { priest: 2, paladin: 2, shaman: 2 } }
+                    { text: "The stalwart guardian who never let harm come to others", points: { warrior_protection: 5, paladin_protection: 5, paladin_holy: 3 } },
+                    { text: "The brilliant scholar who unlocked reality's deepest secrets", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 3 } },
+                    { text: "The shadow that struck down evil before it could spread", points: { rogue_assassination: 5, rogue_subtlety: 5, priest_shadow: 3 } },
+                    { text: "The beacon of hope that healed a broken world", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4 } },
+                    { text: "The force of nature that restored balance to all things", points: { druid_balance: 5, shaman_elemental: 5, shaman_restoration: 4 } }
                 ]
             },
             {
-                question: "Preferred raid schedule commitment?",
+                question: "If you could embody one concept perfectly, it would be:",
                 answers: [
-                    { text: "4-5 nights hardcore progression", points: { warrior: 3, rogue: 3, mage: 2, warlock: 2 } },
-                    { text: "2-3 nights semi-hardcore", points: { hunter: 3, priest: 3, shaman: 3, paladin: 3, druid: 3 } },
-                    { text: "1-2 nights casual raiding", points: { hunter: 3, warlock: 3, druid: 3 } },
-                    { text: "PUG raids when available", points: { mage: 3, hunter: 3, warlock: 2 } },
-                    { text: "No set schedule - play when I can", points: { hunter: 3, druid: 3, rogue: 2 } }
+                    { text: "Justice - ensuring the righteous are rewarded and evil punished", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 3, warrior_fury: 3 } },
+                    { text: "Wisdom - understanding the true nature of existence", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3 } },
+                    { text: "Balance - maintaining harmony between opposing forces", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 3 } },
+                    { text: "Power - the strength to shape reality according to your will", points: { mage_fire: 4, warlock_destruction: 4, warrior_fury: 4, warlock_affliction: 3 } },
+                    { text: "Freedom - liberation from all constraints and limitations", points: { rogue_subtlety: 5, hunter_survival: 4, druid_feral: 3, warrior_fury: 3 } }
                 ]
             },
             {
-                question: "Your goal for gear progression?",
+                question: "Your greatest fear is:",
                 answers: [
-                    { text: "Full BiS in every slot optimized", points: { warrior: 4, rogue: 4, mage: 3 } },
-                    { text: "Good enough gear to perform well", points: { priest: 3, shaman: 3, paladin: 3, druid: 3 } },
-                    { text: "PvP gear priority over PvE", points: { rogue: 3, warrior: 3, mage: 3 } },
-                    { text: "Multiple gear sets for different roles", points: { druid: 4, paladin: 3, warrior: 3, shaman: 3 } },
-                    { text: "Cosmetic and rare items collection", points: { hunter: 2, paladin: 2 } }
+                    { text: "Being powerless to protect those you care about", points: { paladin_protection: 5, warrior_protection: 5, priest_holy: 4, paladin_holy: 4 } },
+                    { text: "Living a life of ignorance and missed understanding", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 3, mage_frost: 3 } },
+                    { text: "Causing imbalance that destroys what you sought to preserve", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } },
+                    { text: "Being discovered and losing your advantage", points: { rogue_subtlety: 5, rogue_assassination: 4, priest_shadow: 3, hunter_survival: 3 } },
+                    { text: "Losing yourself to the very power you sought", points: { warlock_affliction: 4, priest_shadow: 4, warlock_destruction: 4, mage_fire: 3, warlock_demonology: 3 } }
                 ]
             },
             {
-                question: "How important is parsing/meters to you?",
+                question: "When you envision your perfect victory, you see:",
                 answers: [
-                    { text: "I want to be #1 on damage/healing meters", points: { rogue: 4, mage: 4, warlock: 4, warrior: 3 } },
-                    { text: "Top performance but not obsessed", points: { hunter: 3, priest: 3, shaman: 3 } },
-                    { text: "Utility matters more than meters", points: { paladin: 3, shaman: 3, druid: 3 } },
-                    { text: "I focus on mechanics over numbers", points: { priest: 3, druid: 3, paladin: 3 } },
-                    { text: "Meters are toxic - I play for fun", points: { druid: 2, paladin: 2, shaman: 2 } }
+                    { text: "Your enemies defeated honorably in fair combat", points: { warrior_arms: 5, warrior_fury: 4, paladin_retribution: 4, rogue_combat: 3 } },
+                    { text: "Overwhelming magical force eliminating all opposition", points: { mage_fire: 5, warlock_destruction: 5, mage_arcane: 4, shaman_elemental: 3 } },
+                    { text: "Perfect execution of a flawless plan", points: { rogue_assassination: 5, hunter_marksmanship: 4, mage_frost: 4, priest_discipline: 3 } },
+                    { text: "Evil cleansed and the innocent safe forever", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "All opposing forces brought into perfect harmony", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } }
                 ]
             },
             {
-                question: "Your long-term Project Epoch goal?",
+                question: "The quality you most admire in others is:",
                 answers: [
-                    { text: "Server first achievements", points: { warrior: 3, rogue: 3, mage: 3 } },
-                    { text: "Rank 14 PvP grind", points: { warrior: 4, rogue: 3, mage: 3 } },
-                    { text: "Complete all content on multiple characters", points: { druid: 3, paladin: 3, shaman: 3 } },
-                    { text: "Build a strong guild community", points: { paladin: 3, priest: 3, warrior: 2 } },
-                    { text: "Master every aspect of my chosen class", points: { rogue: 3, mage: 3, warlock: 3, hunter: 3 } }
+                    { text: "Unwavering courage in the face of impossible odds", points: { warrior_protection: 5, warrior_fury: 4, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Selfless dedication to helping others", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Brilliant insight that sees through deception", points: { mage_arcane: 4, priest_discipline: 4, rogue_subtlety: 4, mage_frost: 3 } },
+                    { text: "Perfect mastery of their chosen discipline", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3 } },
+                    { text: "Harmony with forces greater than themselves", points: { druid_balance: 5, shaman_elemental: 4, shaman_restoration: 4, druid_feral: 3, hunter_survival: 3 } }
                 ]
             }
         ];
-
-        let currentQuestion = 0;
-        let classScores = {
-            warrior: 0,
-            paladin: 0,
-            hunter: 0,
-            rogue: 0,
-            priest: 0,
-            mage: 0,
-            warlock: 0,
-            shaman: 0,
-            druid: 0
-        };
-        let answeredQuestions = new Array(questions.length).fill(null);
-
-        const classData = {
-            warrior: {
-                description: "Warriors in Project Epoch are the undisputed masters of physical combat. With TBC talents at 60 and new abilities like Heroic Leap and Spell Reflection, they excel as main tanks and melee DPS. Warriors benefit greatly from Epoch's raid-wide shouts and can fulfill both tanking and DPS roles effectively.",
-                specs: {
-                    "Protection": "Premier raid tank with unmatched threat generation and mitigation. Essential for progression.",
-                    "Arms": "PvP powerhouse with Mortal Strike and massive two-handed burst damage.",
-                    "Fury": "Dual-wielding DPS machine with excellent sustained damage and cleave."
-                },
-                pros: [
-                    "Best main tank for raids",
-                    "Top tier melee DPS",
-                    "Excellent PvP presence",
-                    "Gear priority in raids",
-                    "Strong in all content types"
-                ],
-                cons: [
-                    "Gear dependent",
-                    "Limited self-sufficiency",
-                    "Expensive consumables",
-                    "High competition for gear",
-                    "Weak solo farming"
-                ],
-                epochChanges: "Warriors receive Heroic Leap at 40, Spell Reflection at 54, Victory Rush at 10, and Commanding Shout at 58. Battle Shout and Commanding Shout now affect the entire raid. Death Wish and Sweeping Strikes positions are swapped in talent trees.",
-                races: "Alliance: Human (weapon skill), Dwarf (Stoneform), Night Elf (dodge). Horde: Orc (Blood Fury + axe skill), Tauren (health + War Stomp), Undead (Will of the Forsaken)."
-            },
-            paladin: {
-                description: "Paladins are versatile holy warriors capable of tanking, healing, and DPS. With TBC talents and Epoch's raid-wide auras, they're highly valued in all content. The addition of Undead Paladins adds unique flavor to the class.",
-                specs: {
-                    "Holy": "Efficient single-target healer with powerful buffs and mana efficiency.",
-                    "Protection": "AoE tanking specialist with excellent survivability and utility.",
-                    "Retribution": "Burst damage dealer with strong support capabilities and survivability."
-                },
-                pros: [
-                    "Three viable roles",
-                    "Excellent buffs for raids",
-                    "Strong survivability",
-                    "Great solo capability",
-                    "Unique utility (BoP, Freedom)"
-                ],
-                cons: [
-                    "Mana dependent",
-                    "Limited mobility",
-                    "Ret DPS stigma",
-                    "Buff duty in raids",
-                    "Gear competition across specs"
-                ],
-                epochChanges: "All auras now affect the entire raid group. Race-specific seals rather than faction-based. Undead Paladins are now available. Greater Blessings and improved seal system from TBC.",
-                races: "Alliance: Dwarf (survivability), Human (reputation). Horde: Undead Paladin (unique option with Will of the Forsaken)."
-            },
-            hunter: {
-                description: "Hunters are the masters of ranged physical damage with loyal pet companions. Epoch expands pet families to include Foxes, Wasps, Moths, and Serpents, uses the WotLK pet talent system, and removes the dead zone for smooth gameplay.",
-                specs: {
-                    "Beast Mastery": "Empowers pets for incredible damage and tanking capability.",
-                    "Marksmanship": "Precision ranged DPS with powerful aimed shots and true shot aura.",
-                    "Survival": "Utility and trap specialist with enhanced survivability."
-                },
-                pros: [
-                    "Best solo class",
-                    "Excellent farming",
-                    "Unique pet system",
-                    "Strong leveling",
-                    "Minimal gear competition"
-                ],
-                cons: [
-                    "Pet management complexity",
-                    "Ammo management",
-                    "Limited raid spots",
-                    "Melee unfriendly",
-                    "Tranq shot duty"
-                ],
-                epochChanges: "New pet families: Foxes, Wasps, Moths, Serpents. WotLK pet talent tree. No dead zone. Auto shot/melee switching. Ammo stacks to 250. Trueshot Aura affects full raid. New race options: Human and Undead Hunters.",
-                races: "Alliance: Night Elf (Shadowmeld), Dwarf (Gun specialization), Human (new option). Horde: Orc (pet damage), Troll (bow specialization), Undead (new option)."
-            },
-            rogue: {
-                description: "Rogues are masters of burst damage and control. With TBC abilities like Cloak of Shadows and Shadowstep, plus the new Redirect ability and axe training, they dominate in both PvE DPS and PvP combat.",
-                specs: {
-                    "Assassination": "Poison and bleed specialist with consistent damage output.",
-                    "Combat": "Sustained DPS with strong cleave and weapon flexibility.",
-                    "Subtlety": "PvP control master with unmatched burst and utility."
-                },
-                pros: [
-                    "Top tier DPS",
-                    "Excellent PvP class",
-                    "Stealth utility",
-                    "Strong crowd control",
-                    "Consistent performance"
-                ],
-                cons: [
-                    "Melee positioning requirements",
-                    "High skill ceiling",
-                    "Limited raid utility",
-                    "Repair bills in raids",
-                    "Competitive gear environment"
-                ],
-                epochChanges: "Can now train axes with new Axe Specialization talent. New ability Redirect at 42 to transfer combo points. Cloak of Shadows at 38, Shadowstep available. Modified Expose Armor mechanics.",
-                races: "Alliance: Human (perception for PvP), Night Elf (higher stealth), Dwarf (Stoneform). Horde: Orc (stun resist), Undead (Will of the Forsaken)."
-            },
-            priest: {
-                description: "Priests master both holy and shadow magic, excelling as healers while Shadow provides competitive DPS. With TBC talents making all specs viable and new race options, priests are always in demand.",
-                specs: {
-                    "Discipline": "Preventive healing through shields with excellent mana efficiency.",
-                    "Holy": "Raw healing output with powerful group healing abilities.",
-                    "Shadow": "DoT-based DPS with unique utility and solo capability."
-                },
-                pros: [
-                    "Always needed for raids",
-                    "Multiple healing styles",
-                    "Shadow DPS viability",
-                    "Excellent buffs",
-                    "Good gold making (selling buffs)"
-                ],
-                cons: [
-                    "Cloth armor squishiness",
-                    "Healing burnout potential",
-                    "Shadow threat issues",
-                    "Mana management",
-                    "Limited mobility"
-                ],
-                epochChanges: "Power Word: Fortitude affects full raid. Shadow priests are fully viable DPS with TBC talents. New race options: Tauren and Gnome Priests. Improved mana efficiency across all specs.",
-                races: "Alliance: Dwarf (Fear Ward), Human (Spirit bonus), Gnome (new option). Horde: Undead (Devouring Plague), Troll (Shadow guard), Tauren (new option)."
-            },
-            mage: {
-                description: "Mages wield devastating arcane, fire, and frost magic. With the new Rune of Power ability and TBC talents, they're top-tier DPS while providing crucial utility through portals, food, and crowd control.",
-                specs: {
-                    "Arcane": "Burst damage specialist with mana management gameplay.",
-                    "Fire": "Critical strike focused with massive ignite spreads.",
-                    "Frost": "Control and survivability with consistent damage."
-                },
-                pros: [
-                    "Top tier DPS",
-                    "Best AoE farming",
-                    "Excellent gold making",
-                    "Portal/food utility",
-                    "Strong PvP control"
-                ],
-                cons: [
-                    "Mana dependent",
-                    "Threat management",
-                    "Positioning requirements",
-                    "Consumable costs",
-                    "Glass cannon nature"
-                ],
-                epochChanges: "New baseline ability Rune of Power at level 50 (+10% spell damage). Improved Blizzard and AoE farming capabilities. Conjured food/water improved for TBC-era health/mana pools. New option: Dwarf Mage.",
-                races: "Alliance: Gnome (Escape Artist + intellect), Human (Spirit), Dwarf (new option). Horde: Undead (Will of the Forsaken), Troll (Berserking)."
-            },
-            warlock: {
-                description: "Warlocks command demons and dark magic, excelling at DoT damage and providing unique utility. With Soul Shards stacking to 5 and improved demon AI, they're powerful in all content types.",
-                specs: {
-                    "Affliction": "DoT specialist with incredible sustain and efficiency.",
-                    "Demonology": "Pet-focused with enhanced demon abilities and survivability.",
-                    "Destruction": "Direct damage through massive Shadowbolts and fire spells."
-                },
-                pros: [
-                    "Excellent solo capability",
-                    "Unique utility (summons, healthstones)",
-                    "Strong in PvP and PvE",
-                    "Pet versatility",
-                    "Good farming potential"
-                ],
-                cons: [
-                    "Soul Shard management",
-                    "Pet management complexity",
-                    "Threat generation",
-                    "Limited mobility",
-                    "DoT ramp-up time"
-                ],
-                epochChanges: "Soul Shards stack to 5. Soul Bags provide bonus shard generation. Curse of Elements affects Nature damage. Demonic Empowerment replaces Demonic Sacrifice. New option: Troll Warlock.",
-                races: "Alliance: Gnome (Escape Artist), Human (Spirit). Horde: Orc (pet damage), Undead (Will of the Forsaken), Troll (new option)."
-            },
-            shaman: {
-                description: "Shamans command the elements and bring unmatched support through totems and Bloodlust/Heroism. With viable Enhancement DPS and new Dwarf Shamans for Alliance, they're highly valued in all content.",
-                specs: {
-                    "Elemental": "Lightning and lava burst caster with excellent burst damage.",
-                    "Enhancement": "Windfury-powered melee/caster hybrid with huge burst potential.",
-                    "Restoration": "Chain Heal specialist with powerful totems and utility."
-                },
-                pros: [
-                    "Bloodlust/Heroism is mandatory",
-                    "Three viable specs",
-                    "Unique totem utility",
-                    "Strong hybrid potential",
-                    "Alliance option with Dwarves"
-                ],
-                cons: [
-                    "Totem management",
-                    "Mana issues",
-                    "Limited mobility",
-                    "Gear competition",
-                    "Complex rotation"
-                ],
-                epochChanges: "Totems affect entire raid. Unleashed Rage provides flat AP bonus. Shamanistic Rage reworked. Alliance can now play Dwarf Shamans. Improved Enhancement viability with Stormstrike.",
-                races: "Alliance: Dwarf Shaman (new option with Stoneform). Horde: Orc (classic choice), Tauren (War Stomp utility), Troll (Berserking)."
-            },
-            druid: {
-                description: "Druids are the ultimate shapeshifters, capable of tanking, healing, melee DPS, and caster DPS. With Feral AP on all weapons and improved itemization, every spec is viable in Epoch.",
-                specs: {
-                    "Balance": "Moonkin form caster with strong utility and improved scaling.",
-                    "Feral": "Cat DPS or Bear tank with excellent versatility.",
-                    "Restoration": "HoT-based healer with incredible efficiency and raid utility."
-                },
-                pros: [
-                    "Ultimate versatility - 4 roles",
-                    "Excellent solo capability",
-                    "Strong in all content",
-                    "Battle resurrection",
-                    "Stealth in cat form"
-                ],
-                cons: [
-                    "Jack of all trades stigma",
-                    "Complex gameplay",
-                    "Gear management for specs",
-                    "Form dancing required",
-                    "Limited raid spots"
-                ],
-                epochChanges: "Feral Attack Power on ALL weapons. Can use consumables while shapeshifted. Can train polearms. New spell: Revive (out of combat res). Wolfshead Helm removed, Furor compensated. Gift of the Wild is raid-wide.",
-                races: "Alliance: Night Elf (classic druid with Shadowmeld). Horde: Tauren (War Stomp + extra health)."
+        
+        function startQuiz() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            let html = '<h2 class="question">Question ' + (currentQuestion + 1) + ' of ' + questions.length + '</h2>';
+            html += '<p class="question">' + question.question + '</p>';
+            html += '<div class="answers">';
+            
+            for (let i = 0; i < question.answers.length; i++) {
+                html += '<button class="answer-btn" onclick="selectAnswer(' + i + ')">' + question.answers[i].text + '</button>';
+            }
+            
+            html += '</div>';
+            document.getElementById('questionContainer').innerHTML = html;
+            
+            // Update progress bar
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function selectAnswer(answerIndex) {
+            const answer = questions[currentQuestion].answers[answerIndex];
+            
+            // Add points
+            for (const className in answer.points) {
+                classScores[className] += answer.points[className];
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            // Find highest scoring spec
+            let topSpec = '';
+            let topScore = 0;
+            
+            for (const specName in classScores) {
+                if (classScores[specName] > topScore) {
+                    topScore = classScores[specName];
+                    topSpec = specName;
+                }
+            }
+            
+            // Hide quiz, show results
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('results').classList.add('active');
+            
+            // Format and display result
+            const specParts = topSpec.split('_');
+            const className = specParts[0].charAt(0).toUpperCase() + specParts[0].slice(1);
+            const specName = specParts[1].charAt(0).toUpperCase() + specParts[1].slice(1);
+            
+            document.getElementById('classResult').textContent = className + ' (' + specName + ')';
+            
+            // Add spec-specific descriptions
+            const descriptions = {
+                warrior_protection: "Protection Warriors are steadfast guardians who live to shield others from harm. Your unbreakable courage and selfless dedication make you the cornerstone of any group.",
+                warrior_fury: "Fury Warriors channel raw emotion into devastating combat prowess. Your passionate intensity and relentless determination overwhelm all opposition.",
+                warrior_arms: "Arms Warriors are disciplined masters of martial technique. Your methodical approach and perfect execution make you a legendary combatant.",
+                paladin_holy: "Holy Paladins are beacons of divine light and hope. Your unwavering faith and compassionate healing inspire others to greatness.",
+                paladin_protection: "Protection Paladins are righteous defenders blessed by divine power. Your sacred duty to protect the innocent drives every action.",
+                paladin_retribution: "Retribution Paladins are divine instruments of justice. Your righteous fury and moral conviction strike down evil wherever it hides.",
+                hunter_beastmastery: "Beast Mastery Hunters form deep bonds with the wild creatures of the world. Your connection to nature and animal companions defines your strength.",
+                hunter_marksmanship: "Marksmanship Hunters are masters of precision and calculated strikes. Your perfect technique and tactical mind eliminate threats with surgical precision.",
+                hunter_survival: "Survival Hunters are adaptable masters of harsh environments. Your resourcefulness and cunning overcome any obstacle nature presents.",
+                rogue_assassination: "Assassination Rogues are deadly perfectionists who eliminate targets with flawless execution. Your precision and dedication to mastery are unmatched.",
+                rogue_combat: "Combat Rogues are versatile fighters who excel in sustained melee. Your adaptability and martial prowess make you formidable in any encounter.",
+                rogue_subtlety: "Subtlety Rogues are masters of shadow and misdirection. Your cunning intellect and mysterious nature give you power over information itself.",
+                priest_holy: "Holy Priests are compassionate healers dedicated to preserving life. Your selfless service and unwavering faith bring hope to the darkest hours.",
+                priest_discipline: "Discipline Priests balance opposing forces through wisdom and understanding. Your intellectual approach and strategic mind guide others to victory.",
+                priest_shadow: "Shadow Priests embrace darkness to understand the complete nature of existence. Your willingness to explore forbidden paths grants unique insights.",
+                mage_arcane: "Arcane Mages pursue the deepest mysteries of magical theory. Your intellectual curiosity and scholarly dedication unlock reality's fundamental secrets.",
+                mage_fire: "Fire Mages channel passionate intensity into devastating magical power. Your emotional drive and overwhelming force eliminate all opposition.",
+                mage_frost: "Frost Mages combine tactical brilliance with magical mastery. Your calculated approach and battlefield control give you power over every situation.",
+                warlock_affliction: "Affliction Warlocks master gradual corruption and dark influence. Your patient cunning and willingness to embrace forbidden power achieve inevitable victory.",
+                warlock_demonology: "Demonology Warlocks command supernatural allies through arcane contracts. Your understanding of otherworldly forces grants you unique advantages.",
+                warlock_destruction: "Destruction Warlocks wield raw magical devastation. Your ambitious drive and overwhelming power reshape the battlefield to your will.",
+                shaman_elemental: "Elemental Shamans channel the pure forces of nature. Your deep spiritual connection and elemental mastery bring balance to the world.",
+                shaman_enhancement: "Enhancement Shamans blend martial prowess with elemental power. Your adaptable nature and spiritual strength overcome any challenge.",
+                shaman_restoration: "Restoration Shamans heal through connection to ancestral wisdom. Your nurturing spirit and natural harmony preserve life and restore balance.",
+                druid_balance: "Balance Druids maintain harmony between all opposing forces. Your wisdom and understanding of natural cycles guide the world toward equilibrium.",
+                druid_feral: "Feral Druids embrace their primal nature and wild instincts. Your connection to the savage aspects of nature grants you fierce adaptability.",
+                druid_restoration: "Restoration Druids heal through deep connection to life itself. Your compassionate nature and nurturing spirit preserve the natural order."
+            };
+            
+            document.getElementById('classDescription').textContent = descriptions[topSpec] || "A unique specialization perfectly suited to your personality and values!";
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            classScores = {
+                // Warrior specs
+                warrior_protection: 0,
+                warrior_fury: 0,
+                warrior_arms: 0,
+                // Paladin specs  
+                paladin_holy: 0,
+                paladin_protection: 0,
+                paladin_retribution: 0,
+                // Hunter specs
+                hunter_beastmastery: 0,
+                hunter_marksmanship: 0,
+                hunter_survival: 0,
+                // Rogue specs
+                rogue_assassination: 0,
+                rogue_combat: 0,
+                rogue_subtlety: 0,
+                // Priest specs
+                priest_holy: 0,
+                priest_discipline: 0,
+                priest_shadow: 0,
+                // Mage specs
+                mage_arcane: 0,
+                mage_fire: 0,
+                mage_frost: 0,
+                // Warlock specs
+                warlock_affliction: 0,
+                warlock_demonology: 0,
+                warlock_destruction: 0,
+                // Shaman specs
+                shaman_elemental: 0,
+                shaman_enhancement: 0,
+                shaman_restoration: 0,
+                // Druid specs
+                druid_balance: 0,
+                druid_feral: 0,
+                druid_restoration: 0
+            };
+            
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('startScreen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
