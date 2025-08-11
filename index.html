@@ -297,7 +297,7 @@
         <h1>Project Epoch - Class Selector Quiz</h1>
         
         <div id="startScreen" class="start-screen">
-            <p><strong>35 Questions to find your perfect class and specialization!</strong></p>
+            <p><strong>20 Easy Questions to find your perfect class!</strong></p>
             <p>This quiz analyzes your personality, values, and approach to challenges to match you with the ideal class.</p>
             <p>Takes about 5-6 minutes to complete.</p>
             <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
@@ -360,361 +360,357 @@
         };
         
         const questions = [
-            // Personality & Values (1-10)
             {
-                question: "When faced with an injustice, what is your first instinct?",
+                question: "What's your favorite way to play games?",
                 answers: [
-                    { text: "Step forward to protect the innocent, even at personal cost", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, warrior_protection: 4, priest_holy: 3 } },
-                    { text: "Strike from the shadows to eliminate the source", points: { rogue_subtlety: 5, rogue_assassination: 5, priest_shadow: 4, warlock_affliction: 3 } },
-                    { text: "Rally others to fight alongside you for what's right", points: { warrior_fury: 4, warrior_arms: 4, paladin_retribution: 4, shaman_enhancement: 3, priest_holy: 3 } },
-                    { text: "Seek to understand all perspectives before acting", points: { priest_discipline: 5, druid_restoration: 5, druid_balance: 4, shaman_restoration: 4 } },
-                    { text: "Use any means necessary to achieve the greater good", points: { warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 4, rogue_assassination: 3 } }
+                    { text: "Protect my friends and keep everyone safe", points: { paladin_protection: 5, warrior_protection: 5, priest_holy: 3 } },
+                    { text: "Sneak around and surprise enemies", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 3 } },
+                    { text: "Lead the charge and fight up front", points: { warrior_fury: 5, paladin_retribution: 4, warrior_arms: 3 } },
+                    { text: "Help everyone and heal the team", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 3 } },
+                    { text: "Deal lots of damage from far away", points: { mage_fire: 5, hunter_marksmanship: 4, warlock_destruction: 4, mage_frost: 3 } }
                 ]
             },
             {
-                question: "What motivates you to grow stronger?",
+                question: "What do you like most in video games?",
                 answers: [
-                    { text: "To protect those who cannot protect themselves", points: { paladin_protection: 5, paladin_holy: 5, warrior_protection: 4, priest_holy: 4, druid_restoration: 3 } },
-                    { text: "To unlock the deepest mysteries of magic and reality", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
-                    { text: "To achieve perfect mastery over your chosen discipline", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_arcane: 4, warrior_arms: 4, warlock_affliction: 3 } },
-                    { text: "To maintain balance between all forces in the world", points: { druid_balance: 5, druid_restoration: 5, shaman_restoration: 5, shaman_elemental: 4, priest_discipline: 3 } },
-                    { text: "To prove your superiority and claim your rightful place", points: { warrior_fury: 4, rogue_subtlety: 4, warlock_destruction: 4, mage_fire: 4, paladin_retribution: 3 } }
+                    { text: "Being the hero who saves everyone", points: { paladin_holy: 5, paladin_protection: 4, priest_holy: 4, warrior_protection: 3 } },
+                    { text: "Learning cool spells and magic tricks", points: { mage_arcane: 5, mage_fire: 4, mage_frost: 4, warlock_demonology: 3, priest_discipline: 3 } },
+                    { text: "Being really good with weapons", points: { warrior_arms: 5, hunter_marksmanship: 4, rogue_assassination: 4, paladin_retribution: 3 } },
+                    { text: "Helping nature and animals", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, hunter_beastmastery: 4, shaman_elemental: 3 } },
+                    { text: "Being the strongest and winning fights", points: { warrior_fury: 5, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 3 } }
                 ]
             },
             {
-                question: "How do you handle fear in dangerous situations?",
+                question: "When things get scary, what do you do?",
                 answers: [
-                    { text: "Channel it into righteous fury against your enemies", points: { paladin_retribution: 5, warrior_fury: 5, warrior_arms: 4, shaman_enhancement: 3 } },
-                    { text: "Suppress it through discipline and training", points: { warrior_protection: 5, paladin_protection: 4, priest_discipline: 4, hunter_survival: 3, rogue_combat: 3 } },
-                    { text: "Use it to heighten your awareness and reflexes", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 4, druid_feral: 3 } },
-                    { text: "Transform it into calculated strategy", points: { mage_frost: 4, hunter_marksmanship: 4, warlock_demonology: 4, priest_discipline: 3, mage_arcane: 3 } },
-                    { text: "Accept it as natural while staying focused on helping others", points: { priest_holy: 5, druid_restoration: 5, shaman_restoration: 5, paladin_holy: 4 } }
+                    { text: "Get angry and fight harder", points: { warrior_fury: 5, paladin_retribution: 4, shaman_enhancement: 3 } },
+                    { text: "Stay calm and think it through", points: { warrior_protection: 4, priest_discipline: 4, mage_frost: 4, hunter_marksmanship: 3 } },
+                    { text: "Hide and wait for the right moment", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 3 } },
+                    { text: "Make a smart plan to win", points: { mage_arcane: 4, priest_discipline: 4, hunter_marksmanship: 3, warlock_demonology: 3 } },
+                    { text: "Focus on helping my friends", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 3 } }
                 ]
             },
             {
-                question: "What is your relationship with authority and rules?",
+                question: "How do you feel about following rules?",
                 answers: [
-                    { text: "Rules exist to protect society and should be upheld", points: { paladin_holy: 5, paladin_protection: 5, warrior_protection: 4, priest_holy: 4, priest_discipline: 3 } },
-                    { text: "Rules are guidelines, but justice sometimes requires breaking them", points: { paladin_retribution: 4, warrior_fury: 4, priest_shadow: 3, rogue_assassination: 3, warlock_affliction: 2 } },
-                    { text: "Authority must be earned through competence and wisdom", points: { mage_arcane: 4, hunter_marksmanship: 4, priest_discipline: 4, warrior_arms: 3, druid_balance: 3 } },
-                    { text: "Rules are chains that limit true potential", points: { rogue_subtlety: 5, warlock_destruction: 4, warlock_affliction: 4, mage_fire: 3, priest_shadow: 3 } },
-                    { text: "Natural law supersedes artificial constructs", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 4, shaman_restoration: 4, hunter_survival: 3 } }
+                    { text: "Rules are important and should be followed", points: { paladin_holy: 5, paladin_protection: 4, warrior_protection: 4, priest_holy: 3 } },
+                    { text: "Sometimes you have to break rules to do good", points: { paladin_retribution: 4, warrior_fury: 3, rogue_assassination: 3, priest_shadow: 2 } },
+                    { text: "Smart people make the best rules", points: { mage_arcane: 4, priest_discipline: 4, hunter_marksmanship: 3, mage_frost: 3 } },
+                    { text: "Rules just get in the way", points: { rogue_subtlety: 5, warlock_destruction: 4, mage_fire: 3, priest_shadow: 3 } },
+                    { text: "Nature's rules are better than people's rules", points: { druid_balance: 5, druid_feral: 4, shaman_elemental: 4, hunter_survival: 3, shaman_restoration: 3 } }
                 ]
             },
             {
-                question: "How do you prefer to solve complex problems?",
+                question: "How do you solve problems?",
                 answers: [
-                    { text: "Through systematic study and logical analysis", points: { mage_arcane: 5, mage_frost: 4, priest_discipline: 4, warlock_demonology: 4, hunter_marksmanship: 3 } },
-                    { text: "By taking decisive action based on moral conviction", points: { paladin_retribution: 5, paladin_holy: 4, warrior_fury: 4, priest_holy: 3, warrior_arms: 3 } },
-                    { text: "Through careful observation and patient planning", points: { rogue_subtlety: 5, hunter_survival: 4, hunter_marksmanship: 4, rogue_assassination: 3, mage_arcane: 3 } },
-                    { text: "By finding harmony and balance between opposing forces", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4, shaman_elemental: 3 } },
-                    { text: "With overwhelming force applied at the right moment", points: { warrior_fury: 5, mage_fire: 4, warlock_destruction: 4, warrior_arms: 3, paladin_retribution: 3 } }
+                    { text: "Study it carefully and think it through", points: { mage_arcane: 5, mage_frost: 4, priest_discipline: 4, mage_fire: 3 } },
+                    { text: "Do what feels right in my heart", points: { paladin_holy: 5, paladin_retribution: 4, priest_holy: 4, paladin_protection: 3 } },
+                    { text: "Watch and wait for the perfect moment", points: { rogue_subtlety: 5, hunter_survival: 4, rogue_assassination: 3, hunter_marksmanship: 3 } },
+                    { text: "Find a way that works for everyone", points: { druid_balance: 5, priest_discipline: 4, druid_restoration: 4, shaman_restoration: 3 } },
+                    { text: "Hit it really hard until it's fixed", points: { warrior_fury: 5, warrior_arms: 4, paladin_retribution: 3, mage_fire: 3 } }
                 ]
             },
             {
-                question: "What role do you naturally take in group dynamics?",
+                question: "What do you do when playing with friends?",
                 answers: [
-                    { text: "The protector who keeps everyone safe", points: { warrior_protection: 5, paladin_protection: 5, druid_feral: 3, paladin_holy: 2 } },
-                    { text: "The healer who ensures everyone can continue", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5, priest_discipline: 4 } },
-                    { text: "The strategist who plans and coordinates", points: { mage_arcane: 4, priest_discipline: 4, hunter_marksmanship: 4, warlock_demonology: 3, mage_frost: 3 } },
-                    { text: "The specialist who excels at one crucial task", points: { rogue_assassination: 4, hunter_marksmanship: 4, mage_fire: 4, warlock_destruction: 4, rogue_subtlety: 3, warrior_arms: 3 } },
-                    { text: "The versatile member who adapts to fill gaps", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_enhancement: 4, shaman_elemental: 3, shaman_restoration: 3, paladin_retribution: 3 } }
+                    { text: "Keep everyone safe from danger", points: { warrior_protection: 5, paladin_protection: 5, paladin_holy: 3 } },
+                    { text: "Heal everyone when they get hurt", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Make plans and tell everyone what to do", points: { mage_arcane: 4, priest_discipline: 4, hunter_marksmanship: 3, mage_frost: 3 } },
+                    { text: "Be really good at one important job", points: { rogue_assassination: 4, hunter_marksmanship: 4, mage_fire: 4, warrior_arms: 3 } },
+                    { text: "Help with whatever is needed", points: { druid_balance: 5, druid_feral: 4, shaman_enhancement: 4, shaman_elemental: 3, druid_restoration: 3 } }
                 ]
             },
             {
-                question: "How do you handle personal setbacks and failures?",
+                question: "When you fail or mess up, what do you do?",
                 answers: [
-                    { text: "Use them as fuel for renewed determination", points: { warrior_fury: 5, paladin_retribution: 4, warrior_arms: 4, rogue_combat: 3, shaman_enhancement: 3 } },
-                    { text: "Analyze what went wrong and develop a better approach", points: { mage_arcane: 5, priest_discipline: 4, hunter_marksmanship: 4, mage_frost: 3, warlock_demonology: 3 } },
-                    { text: "Accept them as part of the natural cycle and adapt", points: { druid_balance: 5, druid_restoration: 5, shaman_restoration: 4, shaman_elemental: 3, hunter_survival: 3 } },
-                    { text: "Turn them into opportunities for growth and learning", points: { priest_holy: 4, paladin_holy: 4, priest_discipline: 4, druid_balance: 3, mage_arcane: 3 } },
-                    { text: "Plot carefully to ensure they never happen again", points: { rogue_subtlety: 5, warlock_affliction: 4, priest_shadow: 4, rogue_assassination: 3 } }
+                    { text: "Get mad and try even harder next time", points: { warrior_fury: 5, paladin_retribution: 4, warrior_arms: 3, shaman_enhancement: 3 } },
+                    { text: "Figure out what went wrong and fix it", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, hunter_marksmanship: 3 } },
+                    { text: "Accept it and move on - it's natural", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, hunter_survival: 3 } },
+                    { text: "Learn from it and become better", points: { priest_holy: 4, paladin_holy: 4, priest_discipline: 3, mage_arcane: 3 } },
+                    { text: "Make sure it never happens again", points: { rogue_subtlety: 5, rogue_assassination: 4, priest_shadow: 3, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "What draws you to magic or supernatural forces?",
+                question: "What do you think about magic?",
                 answers: [
-                    { text: "The pursuit of absolute knowledge and understanding", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 3, priest_discipline: 3 } },
-                    { text: "Divine connection and service to higher powers", points: { priest_holy: 5, paladin_holy: 5, priest_discipline: 4, paladin_protection: 3 } },
-                    { text: "Harmony with the natural world and its spirits", points: { druid_balance: 5, druid_restoration: 5, shaman_elemental: 5, shaman_restoration: 5, shaman_enhancement: 4, druid_feral: 3 } },
-                    { text: "Power that can be harnessed for personal goals", points: { warlock_destruction: 5, warlock_affliction: 4, mage_fire: 4, priest_shadow: 4, warlock_demonology: 3 } },
-                    { text: "I prefer to rely on physical skill and training", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 4, rogue_assassination: 4, hunter_marksmanship: 3, hunter_survival: 3, hunter_beastmastery: 3, rogue_subtlety: 3 } }
+                    { text: "Magic is cool - I want to learn everything about it", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 3 } },
+                    { text: "Holy magic from good gods is the best", points: { priest_holy: 5, paladin_holy: 5, paladin_protection: 3, priest_discipline: 3 } },
+                    { text: "Nature magic and talking to spirits is awesome", points: { druid_balance: 5, druid_restoration: 4, shaman_elemental: 5, shaman_restoration: 4, shaman_enhancement: 3 } },
+                    { text: "Dark magic is powerful and useful", points: { warlock_destruction: 5, warlock_affliction: 4, priest_shadow: 4, warlock_demonology: 3 } },
+                    { text: "I don't need magic - I'm strong without it", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 4, rogue_assassination: 3, hunter_marksmanship: 3 } }
                 ]
             },
             {
-                question: "How do you view your place in the larger conflict between good and evil?",
+                question: "Are you a good guy or bad guy?",
                 answers: [
-                    { text: "A champion of light standing against darkness", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4, warrior_protection: 2 } },
-                    { text: "A seeker of balance who opposes extremes", points: { druid_balance: 5, druid_restoration: 4, priest_discipline: 4, shaman_restoration: 4, shaman_elemental: 3 } },
-                    { text: "One who embraces darker methods for necessary ends", points: { priest_shadow: 5, warlock_affliction: 5, warlock_destruction: 4, rogue_subtlety: 4, warlock_demonology: 3 } },
-                    { text: "A pragmatist who focuses on survival and results", points: { rogue_assassination: 4, hunter_survival: 4, warrior_fury: 3, rogue_combat: 3, hunter_marksmanship: 3 } },
-                    { text: "An observer who studies all sides before choosing", points: { mage_arcane: 4, mage_frost: 4, priest_discipline: 4, hunter_marksmanship: 3, druid_balance: 3 } }
+                    { text: "Definitely a good guy who fights evil", points: { paladin_holy: 5, paladin_protection: 4, priest_holy: 4, paladin_retribution: 3 } },
+                    { text: "I try to keep things balanced and fair", points: { druid_balance: 5, druid_restoration: 4, priest_discipline: 4, shaman_restoration: 3 } },
+                    { text: "Sometimes you have to be bad to win", points: { priest_shadow: 4, warlock_affliction: 4, warlock_destruction: 4, rogue_subtlety: 3 } },
+                    { text: "I just want to survive and protect myself", points: { rogue_assassination: 4, hunter_survival: 4, warrior_fury: 3, rogue_combat: 3 } },
+                    { text: "I watch first, then pick a side", points: { mage_arcane: 4, mage_frost: 4, priest_discipline: 3, hunter_marksmanship: 3 } }
                 ]
             },
             {
-                question: "What is your greatest strength in times of crisis?",
+                question: "What are you best at when things go wrong?",
                 answers: [
-                    { text: "Unwavering courage in the face of overwhelming odds", points: { warrior_protection: 5, paladin_protection: 5, warrior_fury: 4, paladin_retribution: 4, warrior_arms: 3 } },
-                    { text: "Quick thinking and adaptability to changing situations", points: { rogue_subtlety: 5, druid_balance: 4, druid_feral: 4, priest_discipline: 4, shaman_enhancement: 3 } },
-                    { text: "Deep knowledge that provides solutions others miss", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, hunter_survival: 3 } },
-                    { text: "Compassionate healing that keeps hope alive", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5 } },
-                    { text: "Precise execution when everything depends on performance", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_fire: 4, warlock_destruction: 4, warrior_arms: 3 } }
-                ]
-            },
-
-            // Combat Philosophy & Approach (11-20)
-            {
-                question: "What is your philosophy on dealing with enemies?",
-                answers: [
-                    { text: "Face them honorably in direct combat", points: { warrior_fury: 5, warrior_arms: 5, paladin_retribution: 4, warrior_protection: 3, rogue_combat: 3 } },
-                    { text: "Strike swiftly before they know you're there", points: { rogue_assassination: 5, rogue_subtlety: 5, hunter_marksmanship: 3, druid_feral: 3 } },
-                    { text: "Overwhelm them with superior magical power", points: { mage_fire: 5, warlock_destruction: 5, mage_arcane: 4, shaman_elemental: 4, warlock_demonology: 3 } },
-                    { text: "Outlast them through superior defense and endurance", points: { warrior_protection: 5, paladin_protection: 5, priest_discipline: 3, druid_feral: 3 } },
-                    { text: "Weaken them gradually until victory is inevitable", points: { warlock_affliction: 5, priest_shadow: 4, hunter_survival: 3, druid_balance: 3, rogue_subtlety: 3 } }
-                ]
-            },
-            {
-                question: "How do you prepare for a dangerous encounter?",
-                answers: [
-                    { text: "Through intensive training and perfecting your techniques", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, paladin_retribution: 4, hunter_marksmanship: 3 } },
-                    { text: "By studying your opponents and planning countermeasures", points: { mage_arcane: 5, mage_frost: 4, hunter_marksmanship: 4, priest_discipline: 4, warlock_demonology: 3 } },
-                    { text: "Through meditation and spiritual preparation", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, druid_balance: 4 } },
-                    { text: "By gathering intelligence and scouting thoroughly", points: { rogue_subtlety: 5, hunter_survival: 4, rogue_assassination: 4, hunter_beastmastery: 3 } },
-                    { text: "Through seeking power from any available source", points: { warlock_affliction: 4, warlock_destruction: 4, warlock_demonology: 4, priest_shadow: 4, mage_fire: 3 } }
-                ]
-            },
-            {
-                question: "What gives you confidence in battle?",
-                answers: [
-                    { text: "Superior equipment and physical conditioning", points: { warrior_protection: 4, warrior_arms: 4, warrior_fury: 4, paladin_protection: 3, rogue_combat: 3 } },
-                    { text: "Extensive magical knowledge and preparation", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
-                    { text: "Faith in divine guidance and righteousness", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4 } },
-                    { text: "Perfect technique and countless hours of practice", points: { rogue_assassination: 5, hunter_marksmanship: 5, warrior_arms: 4, rogue_subtlety: 3, rogue_combat: 3 } },
-                    { text: "Deep connection to natural forces", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 5, shaman_enhancement: 4, shaman_restoration: 4 } }
-                ]
-            },
-            {
-                question: "How do you handle multiple threats simultaneously?",
-                answers: [
-                    { text: "Devastating area attacks that hit everything at once", points: { mage_fire: 5, mage_frost: 4, warlock_destruction: 4, shaman_elemental: 4, warrior_fury: 3 } },
-                    { text: "Control the battlefield to fight them one at a time", points: { mage_frost: 4, warrior_protection: 4, paladin_protection: 4, priest_discipline: 3, hunter_survival: 3 } },
-                    { text: "Quick strikes to eliminate the most dangerous first", points: { rogue_assassination: 5, rogue_subtlety: 4, hunter_marksmanship: 4, warrior_arms: 3 } },
-                    { text: "Spread damage over time effects across all of them", points: { warlock_affliction: 5, druid_balance: 4, priest_shadow: 4, hunter_survival: 3 } },
-                    { text: "Survive while allies eliminate the threats", points: { warrior_protection: 5, paladin_protection: 5, priest_holy: 3, priest_discipline: 3 } }
-                ]
-            },
-            {
-                question: "What is your preferred distance from danger?",
-                answers: [
-                    { text: "In the thick of melee combat where I can protect others", points: { warrior_protection: 5, paladin_protection: 5, druid_feral: 4, warrior_fury: 3, paladin_retribution: 3 } },
-                    { text: "Close enough to strike with weapons but mobile", points: { warrior_fury: 4, warrior_arms: 4, rogue_combat: 4, rogue_assassination: 4, paladin_retribution: 4, shaman_enhancement: 4 } },
-                    { text: "At maximum spell range where I can see everything", points: { mage_arcane: 5, mage_fire: 5, mage_frost: 5, warlock_destruction: 4, warlock_affliction: 4, shaman_elemental: 4, priest_shadow: 4 } },
-                    { text: "At optimal range for precision strikes", points: { hunter_marksmanship: 5, hunter_survival: 5, hunter_beastmastery: 5 } },
-                    { text: "Close enough to help but safe enough to keep helping", points: { priest_holy: 4, priest_discipline: 4, druid_restoration: 4, shaman_restoration: 4, paladin_holy: 3 } }
-                ]
-            },
-            {
-                question: "How do you deal with overwhelming opposition?",
-                answers: [
-                    { text: "Stand your ground and weather the storm", points: { warrior_protection: 5, paladin_protection: 5, warrior_fury: 3, priest_discipline: 3 } },
-                    { text: "Strike hard and fast before they can organize", points: { warrior_fury: 5, rogue_assassination: 4, mage_fire: 4, warlock_destruction: 4, paladin_retribution: 3 } },
-                    { text: "Use superior tactics and positioning", points: { hunter_survival: 5, hunter_marksmanship: 4, rogue_subtlety: 4, mage_frost: 4, priest_discipline: 3 } },
-                    { text: "Disappear and return when the odds are better", points: { rogue_subtlety: 5, rogue_assassination: 4, druid_feral: 3, hunter_survival: 3 } },
-                    { text: "Focus on keeping your allies in the fight", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 5, shaman_restoration: 5, priest_discipline: 4 } }
-                ]
-            },
-            {
-                question: "What drives your combat technique?",
-                answers: [
-                    { text: "Raw emotion and passionate intensity", points: { warrior_fury: 5, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 3, shaman_enhancement: 3 } },
-                    { text: "Precise calculation and perfect execution", points: { rogue_assassination: 5, hunter_marksmanship: 5, mage_arcane: 4, warrior_arms: 4, mage_frost: 3 } },
-                    { text: "Deep spiritual connection and inner peace", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4, monk_mistweaver: 0 } },
-                    { text: "Adaptation and flowing with the moment", points: { druid_feral: 5, druid_balance: 4, shaman_enhancement: 4, priest_discipline: 3, rogue_subtlety: 3 } },
-                    { text: "Methodical application of learned techniques", points: { warrior_protection: 4, paladin_protection: 4, rogue_combat: 4, hunter_survival: 3, warlock_demonology: 3 } }
-                ]
-            },
-            {
-                question: "How do you recover from being wounded or depleted?",
-                answers: [
-                    { text: "Channel inner rage to push through the pain", points: { warrior_fury: 5, warrior_arms: 3, paladin_retribution: 3, shaman_enhancement: 3 } },
-                    { text: "Use magical healing to restore yourself", points: { priest_holy: 4, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 3 } },
-                    { text: "Draw power from external sources", points: { warlock_affliction: 4, warlock_destruction: 3, warlock_demonology: 4, priest_shadow: 4 } },
-                    { text: "Wait patiently for natural regeneration", points: { hunter_survival: 4, druid_balance: 3, druid_restoration: 3, shaman_restoration: 3, rogue_subtlety: 2 } },
-                    { text: "Rely on protective gear and defensive positioning", points: { warrior_protection: 5, paladin_protection: 5, hunter_survival: 3, mage_frost: 3 } }
-                ]
-            },
-            {
-                question: "What is your ideal end to a conflict?",
-                answers: [
-                    { text: "Complete and decisive victory over your enemies", points: { warrior_fury: 4, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 4, rogue_assassination: 3 } },
-                    { text: "Justice served and the innocent protected", points: { paladin_holy: 5, paladin_protection: 5, paladin_retribution: 4, priest_holy: 4, warrior_protection: 3 } },
-                    { text: "Balance restored and harmony achieved", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 4, shaman_elemental: 3 } },
-                    { text: "Your objectives accomplished with minimal losses", points: { rogue_subtlety: 4, hunter_survival: 4, mage_arcane: 4, priest_discipline: 3, warlock_demonology: 3 } },
-                    { text: "Complete elimination of the threat", points: { rogue_assassination: 5, warrior_arms: 4, hunter_marksmanship: 4, mage_fire: 3, warlock_destruction: 3 } }
-                ]
-            },
-            {
-                question: "How do you view the use of deception in conflict?",
-                answers: [
-                    { text: "Deception is cowardly - victory should be earned honorably", points: { paladin_holy: 5, paladin_protection: 4, paladin_retribution: 4, warrior_protection: 4, warrior_fury: 3 } },
-                    { text: "Misdirection is a legitimate tactical advantage", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 4, mage_frost: 3, priest_discipline: 3 } },
-                    { text: "Illusion and manipulation are tools like any other", points: { mage_arcane: 4, warlock_affliction: 4, priest_shadow: 4, warlock_demonology: 3, rogue_subtlety: 3 } },
-                    { text: "Sometimes necessary but should be used sparingly", points: { priest_discipline: 4, druid_balance: 4, hunter_marksmanship: 3, warrior_arms: 3 } },
-                    { text: "Whatever works to achieve your goals is acceptable", points: { warlock_affliction: 4, warlock_destruction: 3, priest_shadow: 4, rogue_assassination: 3, warlock_demonology: 3 } }
+                    { text: "Being brave even when it's scary", points: { warrior_protection: 5, paladin_protection: 4, warrior_fury: 4, paladin_retribution: 3 } },
+                    { text: "Thinking fast and changing plans quickly", points: { rogue_subtlety: 5, druid_balance: 4, druid_feral: 4, priest_discipline: 3 } },
+                    { text: "Knowing stuff that helps solve problems", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "Helping and healing people", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Doing exactly what needs to be done", points: { rogue_assassination: 5, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3 } }
                 ]
             },
 
-            // Power & Mastery (21-30)
             {
-                question: "What type of mastery do you find most appealing?",
+                question: "How do you like to fight enemies?",
                 answers: [
-                    { text: "Perfect control over the elements and natural forces", points: { shaman_elemental: 5, shaman_restoration: 4, druid_balance: 5, mage_frost: 4, mage_fire: 3 } },
-                    { text: "Unbreakable martial discipline and weapon mastery", points: { warrior_arms: 5, warrior_fury: 4, warrior_protection: 4, paladin_retribution: 4, rogue_combat: 3 } },
-                    { text: "Divine connection and righteous power", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3, priest_discipline: 3 } },
-                    { text: "Arcane knowledge that transcends mortal understanding", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 4, priest_discipline: 3 } },
-                    { text: "Shadow mastery and forbidden techniques", points: { priest_shadow: 5, warlock_affliction: 5, rogue_subtlety: 4, warlock_destruction: 4, warlock_demonology: 3 } }
+                    { text: "Fight them face to face like a warrior", points: { warrior_fury: 5, warrior_arms: 4, paladin_retribution: 4, warrior_protection: 3 } },
+                    { text: "Attack them before they see me coming", points: { rogue_assassination: 5, rogue_subtlety: 4, hunter_marksmanship: 3, hunter_survival: 3 } },
+                    { text: "Blast them with powerful magic spells", points: { mage_fire: 5, warlock_destruction: 4, mage_arcane: 4, shaman_elemental: 3 } },
+                    { text: "Defend myself until they get tired", points: { warrior_protection: 5, paladin_protection: 4, priest_discipline: 3, mage_frost: 3 } },
+                    { text: "Make them weak over time", points: { warlock_affliction: 5, priest_shadow: 4, druid_balance: 3, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "How do you prefer to gain new abilities?",
+                question: "How do you get ready for a big fight?",
                 answers: [
-                    { text: "Through rigorous training and endless practice", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, hunter_marksmanship: 4, paladin_retribution: 3 } },
-                    { text: "By studying ancient texts and magical theory", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, priest_holy: 3 } },
-                    { text: "Through spiritual communion and divine inspiration", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 3 } },
-                    { text: "By forming pacts and bargaining for power", points: { warlock_affliction: 5, warlock_destruction: 4, warlock_demonology: 4, priest_shadow: 4 } },
-                    { text: "Through harmony with nature and its cycles", points: { druid_balance: 5, druid_feral: 4, druid_restoration: 4, shaman_elemental: 5, shaman_enhancement: 4, shaman_restoration: 3, hunter_survival: 3 } }
+                    { text: "Practice fighting until I'm perfect", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, paladin_retribution: 3 } },
+                    { text: "Learn about my enemy and make a plan", points: { mage_arcane: 5, mage_frost: 4, priest_discipline: 4, hunter_marksmanship: 3 } },
+                    { text: "Pray and get ready spiritually", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Sneak around and spy on them first", points: { rogue_subtlety: 5, hunter_survival: 4, rogue_assassination: 3, hunter_beastmastery: 3 } },
+                    { text: "Get more power however I can", points: { warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 4, warlock_demonology: 3 } }
                 ]
             },
             {
-                question: "What drives your pursuit of power?",
+                question: "What makes you feel confident in fights?",
                 answers: [
-                    { text: "The responsibility to protect those weaker than yourself", points: { paladin_protection: 5, warrior_protection: 5, paladin_holy: 4, priest_holy: 4, druid_restoration: 3 } },
-                    { text: "Intellectual curiosity and the joy of discovery", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3, druid_balance: 3 } },
-                    { text: "The desire to right wrongs and bring justice", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 4, warrior_fury: 3, priest_discipline: 3 } },
-                    { text: "Personal ambition and the will to dominate", points: { warlock_destruction: 4, warrior_fury: 4, mage_fire: 4, rogue_assassination: 3, warlock_affliction: 3 } },
-                    { text: "Understanding your place in the greater cosmic order", points: { druid_balance: 5, priest_discipline: 4, shaman_elemental: 4, shaman_restoration: 4, druid_restoration: 3 } }
+                    { text: "Having good armor and being strong", points: { warrior_protection: 4, warrior_arms: 4, warrior_fury: 4, paladin_protection: 3 } },
+                    { text: "Knowing lots of spells and magic tricks", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 3 } },
+                    { text: "Believing that good will win", points: { paladin_holy: 5, paladin_protection: 4, priest_holy: 4, paladin_retribution: 3 } },
+                    { text: "Being really skilled with my weapon", points: { rogue_assassination: 5, hunter_marksmanship: 4, warrior_arms: 4, rogue_combat: 3 } },
+                    { text: "Being connected to nature", points: { druid_balance: 5, shaman_elemental: 5, druid_restoration: 4, shaman_enhancement: 4, shaman_restoration: 3 } }
                 ]
             },
             {
-                question: "How do you handle the corrupting influence of power?",
+                question: "What do you do when fighting lots of enemies?",
                 answers: [
-                    { text: "Stay grounded through service to others", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 3 } },
-                    { text: "Maintain strict personal discipline and codes", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, warrior_arms: 3, hunter_marksmanship: 3 } },
-                    { text: "Accept that power changes you but try to use it wisely", points: { priest_discipline: 4, druid_balance: 4, mage_arcane: 3, shaman_elemental: 3, warlock_demonology: 3 } },
-                    { text: "Embrace the change as necessary evolution", points: { priest_shadow: 4, warlock_affliction: 4, warlock_destruction: 4, mage_fire: 3, warlock_demonology: 3 } },
-                    { text: "Power is just a tool - corruption comes from weakness", points: { rogue_subtlety: 4, rogue_assassination: 4, hunter_survival: 3, mage_arcane: 3 } }
+                    { text: "Hit all of them at once with big attacks", points: { mage_fire: 5, mage_frost: 4, warlock_destruction: 4, shaman_elemental: 4 } },
+                    { text: "Make them fight me one at a time", points: { warrior_protection: 5, paladin_protection: 4, mage_frost: 4, priest_discipline: 3 } },
+                    { text: "Kill the most dangerous one first", points: { rogue_assassination: 5, rogue_subtlety: 4, hunter_marksmanship: 4, warrior_arms: 3 } },
+                    { text: "Slowly hurt all of them over time", points: { warlock_affliction: 5, druid_balance: 4, priest_shadow: 4, hunter_survival: 3 } },
+                    { text: "Stay alive while my friends help", points: { warrior_protection: 5, paladin_protection: 4, priest_holy: 4, priest_discipline: 3 } }
                 ]
             },
             {
-                question: "What is your relationship with magical or supernatural allies?",
+                question: "Where do you like to be during fights?",
                 answers: [
-                    { text: "I prefer to work with other mortals who share my values", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 3, paladin_retribution: 3 } },
-                    { text: "Divine beings guide and protect those who serve righteously", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
-                    { text: "Nature spirits are partners in maintaining balance", points: { druid_balance: 5, druid_restoration: 4, druid_feral: 4, shaman_elemental: 5, shaman_restoration: 5, shaman_enhancement: 4 } },
-                    { text: "Demons and dark entities are tools to be controlled", points: { warlock_demonology: 5, warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 3 } },
-                    { text: "Wild creatures understand the world better than civilization", points: { hunter_beastmastery: 5, hunter_survival: 4, druid_feral: 4, hunter_marksmanship: 3 } }
+                    { text: "Right up front protecting everyone", points: { warrior_protection: 5, paladin_protection: 5, druid_feral: 4, warrior_fury: 3 } },
+                    { text: "Close to enemies but able to move around", points: { warrior_fury: 4, warrior_arms: 4, rogue_combat: 4, paladin_retribution: 4, shaman_enhancement: 3 } },
+                    { text: "Far away where I can cast spells safely", points: { mage_arcane: 5, mage_fire: 5, mage_frost: 5, warlock_destruction: 4, shaman_elemental: 4, priest_shadow: 3 } },
+                    { text: "The perfect distance to shoot arrows", points: { hunter_marksmanship: 5, hunter_survival: 4, hunter_beastmastery: 4 } },
+                    { text: "Safe enough to keep healing people", points: { priest_holy: 5, priest_discipline: 4, druid_restoration: 4, shaman_restoration: 4 } }
                 ]
             },
             {
-                question: "How do you view your own mortality?",
+                question: "What do you do when you're outnumbered?",
                 answers: [
-                    { text: "Death is the ultimate enemy to be fought at every turn", points: { priest_holy: 5, paladin_holy: 4, warrior_fury: 3, warrior_protection: 3 } },
-                    { text: "Death gives life meaning - accept it but don't seek it", points: { druid_balance: 5, druid_restoration: 4, priest_discipline: 4, shaman_restoration: 4, warrior_arms: 3 } },
-                    { text: "Death is a transition to be prepared for and understood", points: { priest_shadow: 4, druid_balance: 4, warlock_affliction: 3, shaman_elemental: 3 } },
-                    { text: "Immortality through great deeds and remembered legacy", points: { paladin_retribution: 4, warrior_fury: 4, mage_arcane: 3, rogue_assassination: 3 } },
-                    { text: "Death can be cheated through sufficient power", points: { warlock_affliction: 4, warlock_destruction: 3, warlock_demonology: 4, priest_shadow: 4, mage_arcane: 3 } }
+                    { text: "Stand strong and don't give up", points: { warrior_protection: 5, paladin_protection: 5, warrior_fury: 3, priest_discipline: 3 } },
+                    { text: "Attack fast before they get organized", points: { warrior_fury: 5, rogue_assassination: 4, mage_fire: 4, paladin_retribution: 3 } },
+                    { text: "Be smart about where I fight", points: { hunter_survival: 5, hunter_marksmanship: 4, rogue_subtlety: 4, mage_frost: 3 } },
+                    { text: "Hide and come back later", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 3, druid_feral: 3 } },
+                    { text: "Keep my friends alive so we can win together", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4 } }
                 ]
             },
             {
-                question: "What is the source of your inner strength?",
+                question: "What drives you in combat?",
                 answers: [
-                    { text: "Unshakeable faith in divine purpose", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
-                    { text: "Deep connection to the natural world", points: { druid_balance: 5, druid_restoration: 5, shaman_elemental: 5, shaman_restoration: 5, druid_feral: 4, shaman_enhancement: 3, hunter_survival: 3 } },
-                    { text: "Intellectual understanding and rational thought", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
-                    { text: "Personal will and determination to succeed", points: { warrior_fury: 5, warrior_arms: 4, rogue_assassination: 4, warlock_destruction: 4, hunter_marksmanship: 3 } },
-                    { text: "Acceptance of darkness as part of existence", points: { priest_shadow: 5, warlock_affliction: 5, rogue_subtlety: 4, warlock_demonology: 3 } }
+                    { text: "Strong feelings and getting excited", points: { warrior_fury: 5, paladin_retribution: 4, mage_fire: 4, shaman_enhancement: 3 } },
+                    { text: "Being perfect and precise", points: { rogue_assassination: 5, hunter_marksmanship: 4, warrior_arms: 4, mage_arcane: 3 } },
+                    { text: "Staying calm and peaceful inside", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 3 } },
+                    { text: "Going with the flow and adapting", points: { druid_feral: 5, druid_balance: 4, shaman_enhancement: 4, rogue_subtlety: 3 } },
+                    { text: "Using techniques I learned and practiced", points: { warrior_protection: 4, paladin_protection: 4, rogue_combat: 4, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "How do you handle the responsibility that comes with great power?",
+                question: "How do you heal when you're hurt?",
                 answers: [
-                    { text: "Use it selflessly in service of the greater good", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, druid_restoration: 4, priest_discipline: 3 } },
-                    { text: "Wield it carefully with full awareness of consequences", points: { priest_discipline: 5, druid_balance: 5, mage_arcane: 4, paladin_protection: 3, shaman_restoration: 3 } },
-                    { text: "Power should be used to achieve your goals efficiently", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3, warlock_destruction: 3 } },
-                    { text: "Great power demands great ambition", points: { warlock_destruction: 4, mage_fire: 4, warrior_fury: 4, rogue_subtlety: 3, warlock_affliction: 3 } },
-                    { text: "Responsibility is a burden that weakens resolve", points: { priest_shadow: 4, warlock_affliction: 4, rogue_subtlety: 4, warlock_demonology: 3 } }
+                    { text: "Get angry and ignore the pain", points: { warrior_fury: 5, warrior_arms: 3, paladin_retribution: 3, shaman_enhancement: 3 } },
+                    { text: "Use healing magic on myself", points: { priest_holy: 5, paladin_holy: 4, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Take energy from other things", points: { warlock_affliction: 4, warlock_demonology: 4, priest_shadow: 4, warlock_destruction: 3 } },
+                    { text: "Rest and let my body heal naturally", points: { hunter_survival: 4, druid_balance: 3, druid_restoration: 3, shaman_restoration: 3 } },
+                    { text: "Use good armor and stay defensive", points: { warrior_protection: 5, paladin_protection: 4, hunter_survival: 3, mage_frost: 3 } }
                 ]
             },
             {
-                question: "What legacy do you want to leave behind?",
+                question: "How do you want fights to end?",
                 answers: [
-                    { text: "A world made safer through your protection and sacrifice", points: { paladin_protection: 5, warrior_protection: 5, paladin_holy: 4, priest_holy: 4 } },
-                    { text: "Knowledge and wisdom that advances understanding", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 4, mage_frost: 3 } },
-                    { text: "Balance restored between the forces of nature", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, shaman_elemental: 4 } },
-                    { text: "Legends of your unmatched skill and achievements", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3, paladin_retribution: 3 } },
-                    { text: "Fear in the hearts of those who would oppose you", points: { warrior_fury: 4, warlock_destruction: 4, priest_shadow: 4, rogue_subtlety: 3, warlock_affliction: 3 } }
+                    { text: "I win completely and totally", points: { warrior_fury: 4, paladin_retribution: 4, mage_fire: 4, warlock_destruction: 4 } },
+                    { text: "Good guys win and bad guys are stopped", points: { paladin_holy: 5, paladin_protection: 4, priest_holy: 4, warrior_protection: 3 } },
+                    { text: "Everything becomes peaceful and balanced", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 3 } },
+                    { text: "I get what I wanted without losing much", points: { rogue_subtlety: 4, hunter_survival: 4, mage_arcane: 3, priest_discipline: 3 } },
+                    { text: "All threats are completely gone", points: { rogue_assassination: 5, warrior_arms: 4, hunter_marksmanship: 4, mage_fire: 3 } }
                 ]
             },
             {
-                question: "How do you define true mastery?",
+                question: "Is it okay to trick enemies?",
                 answers: [
-                    { text: "When your abilities serve something greater than yourself", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4, paladin_protection: 4 } },
-                    { text: "When you understand the deeper principles behind your power", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3, warlock_demonology: 3 } },
-                    { text: "When you can execute perfectly under any circumstances", points: { rogue_assassination: 5, hunter_marksmanship: 5, warrior_arms: 4, rogue_subtlety: 3, rogue_combat: 3 } },
-                    { text: "When others look to you for leadership and guidance", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, paladin_retribution: 3 } },
-                    { text: "When you have transcended the limitations of mortality", points: { warlock_affliction: 4, priest_shadow: 4, mage_arcane: 4, warlock_demonology: 4, warlock_destruction: 3 } }
+                    { text: "No way - that's cheating and cowardly", points: { paladin_holy: 5, paladin_protection: 4, warrior_protection: 4, warrior_fury: 3 } },
+                    { text: "It's smart fighting and totally fine", points: { rogue_subtlety: 5, rogue_assassination: 4, hunter_survival: 4, mage_frost: 3 } },
+                    { text: "Tricks and illusions are just tools to use", points: { mage_arcane: 4, warlock_affliction: 4, priest_shadow: 4, rogue_subtlety: 3 } },
+                    { text: "Sometimes okay but not too much", points: { priest_discipline: 4, druid_balance: 4, hunter_marksmanship: 3, warrior_arms: 3 } },
+                    { text: "Do whatever it takes to win", points: { warlock_affliction: 4, priest_shadow: 4, warlock_destruction: 3, rogue_assassination: 3 } }
                 ]
             },
 
-            // Final Character Essence (31-35)
             {
-                question: "In your ideal story, you would be remembered as:",
+                question: "What kind of power do you want most?",
                 answers: [
-                    { text: "The stalwart guardian who never let harm come to others", points: { warrior_protection: 5, paladin_protection: 5, paladin_holy: 3 } },
-                    { text: "The brilliant scholar who unlocked reality's deepest secrets", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 3 } },
-                    { text: "The shadow that struck down evil before it could spread", points: { rogue_assassination: 5, rogue_subtlety: 5, priest_shadow: 3 } },
-                    { text: "The beacon of hope that healed a broken world", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4 } },
-                    { text: "The force of nature that restored balance to all things", points: { druid_balance: 5, shaman_elemental: 5, shaman_restoration: 4 } }
+                    { text: "Control over nature like wind, fire, and water", points: { shaman_elemental: 5, druid_balance: 5, mage_frost: 4, mage_fire: 4, shaman_restoration: 3 } },
+                    { text: "Being the best fighter with weapons", points: { warrior_arms: 5, warrior_fury: 4, paladin_retribution: 4, warrior_protection: 3, rogue_combat: 3 } },
+                    { text: "Holy power from good gods", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Really smart magic that few people understand", points: { mage_arcane: 5, mage_frost: 4, mage_fire: 4, warlock_demonology: 3 } },
+                    { text: "Dark magic and secret forbidden spells", points: { priest_shadow: 5, warlock_affliction: 5, warlock_destruction: 4, rogue_subtlety: 3 } }
                 ]
             },
             {
-                question: "If you could embody one concept perfectly, it would be:",
+                question: "How do you want to learn new abilities?",
                 answers: [
-                    { text: "Justice - ensuring the righteous are rewarded and evil punished", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 3, warrior_fury: 3 } },
-                    { text: "Wisdom - understanding the true nature of existence", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3 } },
-                    { text: "Balance - maintaining harmony between opposing forces", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 3 } },
-                    { text: "Power - the strength to shape reality according to your will", points: { mage_fire: 4, warlock_destruction: 4, warrior_fury: 4, warlock_affliction: 3 } },
-                    { text: "Freedom - liberation from all constraints and limitations", points: { rogue_subtlety: 5, hunter_survival: 4, druid_feral: 3, warrior_fury: 3 } }
+                    { text: "Practice fighting over and over until perfect", points: { warrior_arms: 5, warrior_fury: 4, rogue_combat: 4, hunter_marksmanship: 3 } },
+                    { text: "Read books and study magic", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "Pray to gods and get blessed with power", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 3 } },
+                    { text: "Make deals to get power quickly", points: { warlock_affliction: 5, warlock_destruction: 4, priest_shadow: 4, warlock_demonology: 3 } },
+                    { text: "Connect with nature and learn from it", points: { druid_balance: 5, shaman_elemental: 5, druid_restoration: 4, shaman_enhancement: 4, hunter_survival: 3 } }
                 ]
             },
             {
-                question: "Your greatest fear is:",
+                question: "Why do you want to be powerful?",
                 answers: [
-                    { text: "Being powerless to protect those you care about", points: { paladin_protection: 5, warrior_protection: 5, priest_holy: 4, paladin_holy: 4 } },
-                    { text: "Living a life of ignorance and missed understanding", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 3, mage_frost: 3 } },
-                    { text: "Causing imbalance that destroys what you sought to preserve", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } },
-                    { text: "Being discovered and losing your advantage", points: { rogue_subtlety: 5, rogue_assassination: 4, priest_shadow: 3, hunter_survival: 3 } },
-                    { text: "Losing yourself to the very power you sought", points: { warlock_affliction: 4, priest_shadow: 4, warlock_destruction: 4, mage_fire: 3, warlock_demonology: 3 } }
+                    { text: "To protect people who can't protect themselves", points: { paladin_protection: 5, warrior_protection: 5, priest_holy: 4, paladin_holy: 3 } },
+                    { text: "Because learning new things is fun and cool", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, druid_balance: 3 } },
+                    { text: "To stop bad people and help good people", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 4, warrior_fury: 3 } },
+                    { text: "To be the best and strongest person around", points: { warrior_fury: 4, warlock_destruction: 4, mage_fire: 4, rogue_assassination: 3 } },
+                    { text: "To understand how everything in the world works", points: { druid_balance: 5, priest_discipline: 4, shaman_elemental: 4, shaman_restoration: 3 } }
                 ]
             },
             {
-                question: "When you envision your perfect victory, you see:",
+                question: "What if power makes you a bad person?",
                 answers: [
-                    { text: "Your enemies defeated honorably in fair combat", points: { warrior_arms: 5, warrior_fury: 4, paladin_retribution: 4, rogue_combat: 3 } },
-                    { text: "Overwhelming magical force eliminating all opposition", points: { mage_fire: 5, warlock_destruction: 5, mage_arcane: 4, shaman_elemental: 3 } },
-                    { text: "Perfect execution of a flawless plan", points: { rogue_assassination: 5, hunter_marksmanship: 4, mage_frost: 4, priest_discipline: 3 } },
-                    { text: "Evil cleansed and the innocent safe forever", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
-                    { text: "All opposing forces brought into perfect harmony", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } }
+                    { text: "I'll always help others so I stay good", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 3 } },
+                    { text: "I'll follow rules to keep myself in line", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, warrior_arms: 3 } },
+                    { text: "Power changes people but I'll try to stay good", points: { priest_discipline: 4, druid_balance: 4, mage_arcane: 3, shaman_elemental: 3 } },
+                    { text: "Maybe becoming different is just part of getting stronger", points: { priest_shadow: 4, warlock_affliction: 4, warlock_destruction: 4, mage_fire: 3 } },
+                    { text: "Power doesn't make you bad - weak people just can't handle it", points: { rogue_subtlety: 4, rogue_assassination: 4, hunter_survival: 3, mage_arcane: 3 } }
                 ]
             },
             {
-                question: "The quality you most admire in others is:",
+                question: "Who would you want as magical friends?",
                 answers: [
-                    { text: "Unwavering courage in the face of impossible odds", points: { warrior_protection: 5, warrior_fury: 4, paladin_protection: 4, paladin_retribution: 3 } },
-                    { text: "Selfless dedication to helping others", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4 } },
-                    { text: "Brilliant insight that sees through deception", points: { mage_arcane: 4, priest_discipline: 4, rogue_subtlety: 4, mage_frost: 3 } },
-                    { text: "Perfect mastery of their chosen discipline", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3 } },
-                    { text: "Harmony with forces greater than themselves", points: { druid_balance: 5, shaman_elemental: 4, shaman_restoration: 4, druid_feral: 3, hunter_survival: 3 } }
+                    { text: "Regular people who think like me", points: { warrior_fury: 4, warrior_arms: 4, warrior_protection: 4, rogue_combat: 3 } },
+                    { text: "Good angels and holy spirits", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Nature spirits and tree friends", points: { druid_balance: 5, shaman_elemental: 5, druid_restoration: 4, shaman_restoration: 4, shaman_enhancement: 3 } },
+                    { text: "Demons that I can control and use", points: { warlock_demonology: 5, warlock_affliction: 4, warlock_destruction: 4, priest_shadow: 3 } },
+                    { text: "Animals and wild creatures", points: { hunter_beastmastery: 5, hunter_survival: 4, druid_feral: 4, hunter_marksmanship: 3 } }
+                ]
+            },
+            {
+                question: "How do you feel about dying?",
+                answers: [
+                    { text: "Death is bad and I'll fight it with everything", points: { priest_holy: 5, paladin_holy: 4, warrior_fury: 3, warrior_protection: 3 } },
+                    { text: "Death is natural but I don't want it to happen yet", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, priest_discipline: 3 } },
+                    { text: "Death is just another step in life", points: { priest_shadow: 4, druid_balance: 4, warlock_affliction: 3, shaman_elemental: 3 } },
+                    { text: "I want people to remember me after I die", points: { paladin_retribution: 4, warrior_fury: 4, mage_arcane: 3, rogue_assassination: 3 } },
+                    { text: "If I'm powerful enough, I won't have to die", points: { warlock_affliction: 4, warlock_demonology: 4, priest_shadow: 4, mage_arcane: 3 } }
+                ]
+            },
+            {
+                question: "What makes you feel strong inside?",
+                answers: [
+                    { text: "Believing in good gods and doing what's right", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Being connected to nature and animals", points: { druid_balance: 5, druid_restoration: 5, shaman_elemental: 5, shaman_restoration: 4, hunter_survival: 3 } },
+                    { text: "Being smart and thinking things through", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "Never giving up and always trying hard", points: { warrior_fury: 5, warrior_arms: 4, rogue_assassination: 4, hunter_marksmanship: 3 } },
+                    { text: "Accepting that some darkness is part of life", points: { priest_shadow: 5, warlock_affliction: 5, rogue_subtlety: 4, warlock_demonology: 3 } }
+                ]
+            },
+            {
+                question: "If you had lots of power, how would you use it?",
+                answers: [
+                    { text: "Always use it to help other people", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, druid_restoration: 4 } },
+                    { text: "Be very careful and think about what might happen", points: { priest_discipline: 5, druid_balance: 5, mage_arcane: 4, shaman_restoration: 3 } },
+                    { text: "Use it to get things done the best way", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3 } },
+                    { text: "If I have big power, I should have big goals", points: { warlock_destruction: 4, mage_fire: 4, warrior_fury: 4, warlock_affliction: 3 } },
+                    { text: "Worrying about others just makes you weaker", points: { priest_shadow: 4, warlock_affliction: 4, rogue_subtlety: 4, warlock_demonology: 3 } }
+                ]
+            },
+            {
+                question: "What do you want people to remember about you?",
+                answers: [
+                    { text: "That I kept everyone safe and protected them", points: { paladin_protection: 5, warrior_protection: 5, paladin_holy: 4, priest_holy: 4 } },
+                    { text: "That I was really smart and taught people things", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "That I helped nature and made the world balanced", points: { druid_balance: 5, druid_restoration: 4, shaman_restoration: 4, shaman_elemental: 4 } },
+                    { text: "That I was the best at what I did", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, paladin_retribution: 3 } },
+                    { text: "That I was so strong that enemies were scared of me", points: { warrior_fury: 4, warlock_destruction: 4, priest_shadow: 4, warlock_affliction: 3 } }
+                ]
+            },
+            {
+                question: "When do you know you've become really good at something?",
+                answers: [
+                    { text: "When I can use my skills to help lots of people", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, paladin_protection: 4 } },
+                    { text: "When I understand how everything really works", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3 } },
+                    { text: "When I never make mistakes, even when it's hard", points: { rogue_assassination: 5, hunter_marksmanship: 5, warrior_arms: 4, rogue_combat: 3 } },
+                    { text: "When people ask me to be their leader", points: { paladin_protection: 4, warrior_protection: 4, priest_discipline: 4, paladin_retribution: 3 } },
+                    { text: "When I'm so good that normal rules don't apply to me", points: { warlock_affliction: 4, priest_shadow: 4, mage_arcane: 4, warlock_demonology: 3 } }
+                ]
+            },
+
+            {
+                question: "In your perfect story, you would be:",
+                answers: [
+                    { text: "The hero who always protected everyone", points: { warrior_protection: 5, paladin_protection: 5, paladin_holy: 3 } },
+                    { text: "The smart person who figured out all the mysteries", points: { mage_arcane: 5, priest_discipline: 4, warlock_demonology: 3 } },
+                    { text: "The sneaky hero who stopped bad guys secretly", points: { rogue_assassination: 5, rogue_subtlety: 5, priest_shadow: 3 } },
+                    { text: "The healer who saved everyone and gave them hope", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4 } },
+                    { text: "The nature person who made everything balanced", points: { druid_balance: 5, shaman_elemental: 5, shaman_restoration: 4 } }
+                ]
+            },
+            {
+                question: "What's the most important thing in the world?",
+                answers: [
+                    { text: "Making sure good people win and bad people lose", points: { paladin_retribution: 5, paladin_holy: 4, priest_holy: 3, warrior_fury: 3 } },
+                    { text: "Being smart and understanding everything", points: { mage_arcane: 5, priest_discipline: 4, druid_balance: 4, mage_frost: 3 } },
+                    { text: "Keeping everything peaceful and balanced", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 3 } },
+                    { text: "Being strong enough to change things", points: { warrior_fury: 4, mage_fire: 4, warlock_destruction: 4, warlock_affliction: 3 } },
+                    { text: "Being free to do whatever you want", points: { rogue_subtlety: 5, hunter_survival: 4, druid_feral: 3, warrior_fury: 3 } }
+                ]
+            },
+            {
+                question: "What scares you the most?",
+                answers: [
+                    { text: "Not being strong enough to save my friends", points: { paladin_protection: 5, warrior_protection: 5, priest_holy: 4, paladin_holy: 4 } },
+                    { text: "Never learning the things I want to know", points: { mage_arcane: 5, priest_discipline: 4, mage_frost: 4, warlock_demonology: 3 } },
+                    { text: "Accidentally breaking something I was trying to protect", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } },
+                    { text: "Getting caught when I'm trying to be sneaky", points: { rogue_subtlety: 5, rogue_assassination: 4, priest_shadow: 3, hunter_survival: 3 } },
+                    { text: "Becoming a bad person because of my power", points: { warlock_affliction: 4, priest_shadow: 4, warlock_destruction: 4, warlock_demonology: 3 } }
+                ]
+            },
+            {
+                question: "What does your perfect victory look like?",
+                answers: [
+                    { text: "Beating enemies in a fair, honest fight", points: { warrior_arms: 5, warrior_fury: 4, paladin_retribution: 4, rogue_combat: 3 } },
+                    { text: "Using awesome magic to defeat everyone", points: { mage_fire: 5, warlock_destruction: 5, mage_arcane: 4, shaman_elemental: 3 } },
+                    { text: "Everything going exactly according to my plan", points: { rogue_assassination: 5, hunter_marksmanship: 4, mage_frost: 4, priest_discipline: 3 } },
+                    { text: "All the bad guys gone and good people safe", points: { paladin_holy: 5, priest_holy: 5, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Everyone getting along and no more fighting", points: { druid_balance: 5, priest_discipline: 4, shaman_restoration: 4, druid_restoration: 4 } }
+                ]
+            },
+            {
+                question: "What do you like most about other people?",
+                answers: [
+                    { text: "Being brave even when things look hopeless", points: { warrior_protection: 5, warrior_fury: 4, paladin_protection: 4, paladin_retribution: 3 } },
+                    { text: "Always helping others without thinking of themselves", points: { priest_holy: 5, paladin_holy: 5, druid_restoration: 4, shaman_restoration: 4 } },
+                    { text: "Being really smart and seeing through lies", points: { mage_arcane: 4, priest_discipline: 4, rogue_subtlety: 4, mage_frost: 3 } },
+                    { text: "Being the absolute best at what they do", points: { rogue_assassination: 4, hunter_marksmanship: 4, warrior_arms: 4, mage_fire: 3 } },
+                    { text: "Being connected to nature and bigger things", points: { druid_balance: 5, shaman_elemental: 4, shaman_restoration: 4, hunter_survival: 3 } }
                 ]
             }
         ];
